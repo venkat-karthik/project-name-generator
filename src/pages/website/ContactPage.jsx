@@ -1,0 +1,131 @@
+import { useState } from 'react';
+import { MessageCircle, Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import WebsiteNav from '../../components/WebsiteNav';
+import WebsiteFooter from '../../components/WebsiteFooter';
+
+export default function ContactPage() {
+  const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' });
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
+  return (
+    <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
+      <WebsiteNav />
+
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center' }}>
+        <p className="section-tag" style={{ marginBottom: 16 }}>Contact Us</p>
+        <h1 style={{ fontSize: 'clamp(36px,5vw,64px)', fontWeight: 700, letterSpacing: '-2px', color: '#f0f0f0', marginBottom: 20 }}>
+          Let's Build Something<br /><span className="gold-text">Remarkable Together</span>
+        </h1>
+        <p style={{ color: '#555', fontSize: 18, maxWidth: 520, margin: '0 auto' }}>Tell us about your project. We'll respond within 2 hours.</p>
+      </section>
+
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px 80px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 32, alignItems: 'start' }}>
+          {/* Contact Info */}
+          <div>
+            <div className="card" style={{ padding: 32, marginBottom: 16 }}>
+              <h3 style={{ fontSize: 16, fontWeight: 600, color: '#f0f0f0', marginBottom: 20 }}>Get In Touch</h3>
+
+              <a href="mailto:hello@velfound.com" style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, textDecoration: 'none' }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: '#1a1a1a', border: '1px solid #222', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Mail size={16} color="#c9a84c" />
+                </div>
+                <div>
+                  <div style={{ fontSize: 11, color: '#444', marginBottom: 2 }}>Email</div>
+                  <div style={{ fontSize: 14, color: '#f0f0f0' }}>hello@velfound.com</div>
+                </div>
+              </a>
+
+              <button onClick={() => window.open('https://wa.me/919876543210', '_blank')} style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, background: 'none', border: 'none', cursor: 'pointer', padding: 0, width: '100%' }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(74,222,128,0.1)', border: '1px solid rgba(74,222,128,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <MessageCircle size={16} color="#4ade80" />
+                </div>
+                <div style={{ textAlign: 'left' }}>
+                  <div style={{ fontSize: 11, color: '#444', marginBottom: 2 }}>WhatsApp</div>
+                  <div style={{ fontSize: 14, color: '#f0f0f0' }}>+91 98765 43210</div>
+                </div>
+              </button>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: '#1a1a1a', border: '1px solid #222', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <MapPin size={16} color="#c9a84c" />
+                </div>
+                <div>
+                  <div style={{ fontSize: 11, color: '#444', marginBottom: 2 }}>Location</div>
+                  <div style={{ fontSize: 14, color: '#f0f0f0' }}>Bangalore, India (Remote-first)</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="card" style={{ padding: 24 }}>
+              <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#4ade80', marginTop: 4, flexShrink: 0 }} />
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#f0f0f0', marginBottom: 2 }}>Response in 2 hours</div>
+                  <div style={{ fontSize: 12, color: '#555' }}>Mon–Sat, 9AM–8PM IST</div>
+                </div>
+              </div>
+              <button className="btn-gold" onClick={() => window.open('https://calendly.com', '_blank')} style={{ width: '100%', justifyContent: 'center', fontSize: 13 }}>Book a 30-min Strategy Call</button>
+            </div>
+          </div>
+
+          {/* Form */}
+          <div className="card" style={{ padding: 36 }}>
+            {sent ? (
+              <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                <CheckCircle2 size={48} color="#4ade80" style={{ margin: '0 auto 16px' }} />
+                <h3 style={{ fontSize: 20, fontWeight: 700, color: '#f0f0f0', marginBottom: 8 }}>Message Sent!</h3>
+                <p style={{ color: '#555', fontSize: 14 }}>We'll get back to you within 2 hours.</p>
+                <button className="btn-outline" onClick={() => setSent(false)} style={{ marginTop: 24 }}>Send Another</button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <h3 style={{ fontSize: 18, fontWeight: 600, color: '#f0f0f0', marginBottom: 24 }}>Tell Us About Your Project</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+                  <div>
+                    <label className="label">Full Name *</label>
+                    <input className="input" placeholder="Rahul Sharma" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required />
+                  </div>
+                  <div>
+                    <label className="label">Email *</label>
+                    <input className="input" type="email" placeholder="rahul@company.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required />
+                  </div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+                  <div>
+                    <label className="label">Phone</label>
+                    <input className="input" placeholder="+91 98765 43210" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
+                  </div>
+                  <div>
+                    <label className="label">Service Interested In</label>
+                    <select className="input" value={form.service} onChange={e => setForm({...form, service: e.target.value})}>
+                      <option value="">Select a service</option>
+                      <option>AI & Automation</option>
+                      <option>AI Voice Systems</option>
+                      <option>Web Solutions</option>
+                      <option>Audit & Strategy</option>
+                    </select>
+                  </div>
+                </div>
+                <div style={{ marginBottom: 24 }}>
+                  <label className="label">Tell us about your project *</label>
+                  <textarea className="input" placeholder="Describe what you're trying to automate or build. The more detail, the better..." value={form.message} onChange={e => setForm({...form, message: e.target.value})} required style={{ minHeight: 120 }} />
+                </div>
+                <button type="submit" className="btn-gold" style={{ width: '100%', justifyContent: 'center', fontSize: 15, padding: '14px' }}>
+                  <Send size={15} /> Send Message
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <WebsiteFooter />
+    </div>
+  );
+}
