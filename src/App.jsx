@@ -7,7 +7,6 @@ import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 import HomePage from './pages/website/HomePage';
 import ServicesPage from './pages/website/ServicesPage';
 import SolutionsPage from './pages/website/SolutionsPage';
-import PortfolioPage from './pages/website/PortfolioPage';
 import PricingPage from './pages/website/PricingPage';
 import BlogPage from './pages/website/BlogPage';
 import AboutPage from './pages/website/AboutPage';
@@ -39,7 +38,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/solutions" element={<SolutionsPage />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/about" element={<AboutPage />} />
