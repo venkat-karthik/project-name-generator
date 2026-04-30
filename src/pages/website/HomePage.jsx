@@ -46,11 +46,11 @@ export default function HomePage() {
           </div>
           <p className="section-tag" style={{ marginBottom: 16 }}>Build Less. Automate More.</p>
           <h1 style={{ fontSize: 'clamp(28px, 6vw, 80px)', fontWeight: 700, letterSpacing: '-2px', lineHeight: 1.05, color: '#f0f0f0', marginBottom: 24 }}>
-            We Build Systems That<br />
-            <span className="gold-text">Run Your Business</span>
+            Student-Built AI<br />
+            <span className="gold-text">For Real Business Impact</span>
           </h1>
           <p style={{ color: '#666', fontSize: 'clamp(14px, 3vw, 18px)', maxWidth: 560, margin: '0 auto 40px', lineHeight: 1.6 }}>
-            AI automation, voice agents, and web solutions that eliminate manual work and drive revenue — all without hiring more people.
+            A group of friends building custom AI automation systems. We learn, we build, we deliver results. No corporate BS, just real solutions for real businesses.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button className="btn-gold" onClick={() => setBookingOpen(true)} style={{ fontSize: 'clamp(12px, 2vw, 15px)', padding: 'clamp(10px, 2vw, 14px) clamp(16px, 3vw, 32px)' }}>
