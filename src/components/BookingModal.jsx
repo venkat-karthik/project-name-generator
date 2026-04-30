@@ -24,7 +24,22 @@ export default function BookingModal({ isOpen, onClose }) {
     setLoading(true);
 
     try {
-      await addBooking(formData);
+      // Try to add booking to Firebase
+      try {
+        await addBooking(formData);
+      } catch (firebaseError) {
+        console.warn('Firebase booking failed, using fallback:', firebaseError);
+        // Fallback: Send email directly via contact service
+        const { contactService } = await import('../services/contactService');
+        await contactService.submitContactForm({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: `Booking Request:\nDate: ${formData.date}\nTime: ${formData.time}\n\nMessage: ${formData.message}`,
+          type: 'booking'
+        });
+      }
+
       setSuccess(true);
       setFormData({ name: '', email: '', phone: '', date: '', time: '', message: '' });
       
@@ -34,7 +49,7 @@ export default function BookingModal({ isOpen, onClose }) {
       }, 2000);
     } catch (error) {
       console.error('Booking error:', error);
-      alert('Failed to book. Please try again.');
+      alert('Failed to book. Please try again or contact us on WhatsApp.');
     } finally {
       setLoading(false);
     }
