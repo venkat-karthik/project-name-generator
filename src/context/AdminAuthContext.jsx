@@ -25,11 +25,15 @@ export function AdminAuthProvider({ children }) {
   const signInWithGoogle = async () => {
     try {
       setError(null);
+      console.log('Context: Initiating Google Sign-In');
       const user = await adminAuthService.signInWithGoogle();
+      console.log('Context: Sign-in successful');
       setAdminUser(user);
       return user;
     } catch (err) {
-      setError(err.message);
+      console.error('Context: Sign-in error:', err);
+      const errorMessage = err.message || 'Failed to sign in. Please try again.';
+      setError(errorMessage);
       throw err;
     }
   };

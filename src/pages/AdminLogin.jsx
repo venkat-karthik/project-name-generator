@@ -13,10 +13,14 @@ export default function AdminLogin() {
     try {
       setIsLoading(true);
       setLocalError(null);
+      console.log('Login page: Starting sign-in');
       await signInWithGoogle();
+      console.log('Login page: Sign-in successful, navigating to dashboard');
       navigate('/admin/dashboard');
     } catch (err) {
-      setLocalError(err.message);
+      console.error('Login page: Sign-in error:', err);
+      const errorMsg = err.message || 'Failed to sign in. Please check your email and try again.';
+      setLocalError(errorMsg);
       setIsLoading(false);
     }
   };

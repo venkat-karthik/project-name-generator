@@ -3,37 +3,65 @@ import {
   GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
 } from 'firebase/auth';
 import { auth, db } from '../config/firebase';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 // List of authorized admin emails
 const AUTHORIZED_ADMINS = [
   'velfound1@gmail.com',
+  'akshath.tumkur@velfound.com',
+  'sahil.ranakoti@velfound.com',
+  'jayanth.karthik@velfound.com',
+  'vikas.reddy@velfound.com',
+  'nishanth.konakondu@velfound.com',
+  'varshith@velfound.com',
+  'gudipati.srinadh@velfound.com',
 ];
 
 export const adminAuthService = {
   // Sign in with Google
   async signInWithGoogle() {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
+      console.log('Starting Google Sign-In...');
+      
+      // Set persistence
+      await setPersistence(auth, browserLocalPersistence);
+      
+      console.log('Attempting popup sign-in...');
+      const result = await Promise.race([
+        signInWithPopup(auth, googleProvider),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Sign-in timeout. Please try again.')), 30000)
+        )
+      ]);
+      
       const user = result.user;
       const email = user.email;
 
+      console.log('User signed in:', email);
+
       // Check if user is authorized admin
       if (!AUTHORIZED_ADMINS.includes(email)) {
+        console.warn('Unauthorized admin attempt:', email);
         // Sign out unauthorized user
         await signOut(auth);
-        throw new Error('You are not authorized to access the admin panel. Please contact the administrator.');
+        throw new Error(`Email "${email}" is not authorized. Authorized emails: ${AUTHORIZED_ADMINS.join(', ')}`);
       }
+
+      console.log('User authorized, creating/updating admin document...');
 
       // Get or create admin user document
       const adminDocRef = doc(db, 'admins', user.uid);
       const adminDocSnap = await getDoc(adminDocRef);
 
       if (!adminDocSnap.exists()) {
+        console.log('Creating new admin document...');
         // Create new admin document
         await setDoc(adminDocRef, {
           uid: user.uid,
@@ -41,12 +69,13 @@ export const adminAuthService = {
           name: user.displayName || 'Admin',
           photoURL: user.photoURL,
           role: 'admin',
-          accessLevel: 'founder', // Default to founder, can be changed
+          accessLevel: 'founder',
           active: true,
           createdAt: serverTimestamp(),
           lastLogin: serverTimestamp(),
         });
       } else {
+        console.log('Updating existing admin document...');
         // Update last login
         await setDoc(
           adminDocRef,
@@ -55,6 +84,7 @@ export const adminAuthService = {
         );
       }
 
+      console.log('Admin sign-in successful');
       return user;
     } catch (error) {
       console.error('Admin sign in error:', error);
