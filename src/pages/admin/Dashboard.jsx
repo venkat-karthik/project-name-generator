@@ -20,7 +20,7 @@ export default function Dashboard() {
   const activeMembers = members.filter(m => m.active).length;
 
   const stats = [
-    { label: 'Total Revenue', value: fmt(totalRevenue), icon: DollarSign, change: '+18%', color: '#c9a84c' },
+    { label: 'Total Revenue', value: fmt(totalRevenue), icon: DollarSign, change: '+18%', color: '#3b82f6' },
     { label: 'Active Leads', value: activeLeads, icon: Users, change: '+5 this week', color: '#60a5fa' },
     { label: 'Projects', value: projects.length, icon: FolderKanban, change: `${approvedProjects} approved`, color: '#a78bfa' },
     { label: 'Team Members', value: activeMembers, icon: TrendingUp, change: 'Active', color: '#4ade80' },
@@ -45,8 +45,8 @@ export default function Dashboard() {
 
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 12, marginBottom: 24 }}>
-        {stats.map(s => (
-          <div key={s.label} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '20px' }}>
+        {stats.map((s, i) => (
+          <div key={s.label} className="fade-in-up" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '20px', animationDelay: `${i * 0.1}s` }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
               <div style={{ width: 36, height: 36, borderRadius: 10, background: `${s.color}15`, border: `1px solid ${s.color}25`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <s.icon size={16} color={s.color} />
@@ -73,13 +73,13 @@ export default function Dashboard() {
             <AreaChart data={revenueData}>
               <defs>
                 <linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#c9a84c" stopOpacity={0.3} />
-                  <stop offset="100%" stopColor="#c9a84c" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="#3b82f6" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#444' }} axisLine={false} tickLine={false} />
               <Tooltip contentStyle={{ background: '#111', border: '1px solid #222', borderRadius: 8, fontSize: 12 }} formatter={(v) => [fmt(v), 'Revenue']} />
-              <Area type="monotone" dataKey="revenue" stroke="#c9a84c" fill="url(#rg)" strokeWidth={2} dot={false} />
+              <Area type="monotone" dataKey="revenue" stroke="#3b82f6" fill="url(#rg)" strokeWidth={2} dot={false} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -90,7 +90,7 @@ export default function Dashboard() {
           {[
             { label: 'New', count: leads.filter(l => l.status === 'new').length, color: '#60a5fa' },
             { label: 'Contacted', count: leads.filter(l => l.status === 'contacted').length, color: '#a78bfa' },
-            { label: 'Qualified', count: leads.filter(l => l.status === 'qualified').length, color: '#c9a84c' },
+            { label: 'Qualified', count: leads.filter(l => l.status === 'qualified').length, color: '#3b82f6' },
             { label: 'Proposal', count: leads.filter(l => l.status === 'proposal').length, color: '#f59e0b' },
             { label: 'Won', count: wonLeads, color: '#4ade80' },
             { label: 'Lost', count: leads.filter(l => l.status === 'lost').length, color: '#f87171' },
@@ -103,7 +103,7 @@ export default function Dashboard() {
               <span style={{ fontSize: 13, fontWeight: 600, color: '#f0f0f0' }}>{s.count}</span>
             </div>
           ))}
-          <Link to="/admin/crm" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#c9a84c', fontSize: 12, marginTop: 16, textDecoration: 'none' }}>
+          <Link to="/admin/crm" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#3b82f6', fontSize: 12, marginTop: 16, textDecoration: 'none' }}>
             View CRM <ArrowRight size={12} />
           </Link>
         </div>
@@ -114,7 +114,7 @@ export default function Dashboard() {
         <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: 24 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <h3 style={{ fontSize: 14, fontWeight: 600, color: '#f0f0f0' }}>Recent Projects</h3>
-            <Link to="/admin/projects" style={{ fontSize: 11, color: '#c9a84c', textDecoration: 'none' }}>View all</Link>
+            <Link to="/admin/projects" style={{ fontSize: 11, color: '#3b82f6', textDecoration: 'none' }}>View all</Link>
           </div>
           {projects.map(p => (
             <Link key={p.id} to={`/admin/projects/${p.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #1a1a1a', textDecoration: 'none' }}>
@@ -125,6 +125,9 @@ export default function Dashboard() {
               <span className={`badge status-${p.status}`} style={{ fontSize: 10 }}>{p.status}</span>
             </Link>
           ))}
+          {projects.length === 0 && (
+            <div style={{ textAlign: 'center', padding: '20px', color: '#555', fontSize: 12 }}>No projects yet</div>
+          )}
         </div>
 
         {/* Recent Activity */}
@@ -133,7 +136,7 @@ export default function Dashboard() {
           {recentActivity.map((a, i) => (
             <div key={i} style={{ display: 'flex', gap: 12, marginBottom: 14, alignItems: 'flex-start' }}>
               <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#1a1a1a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                {a.type === 'project' ? <CheckCircle size={12} color="#4ade80" /> : a.type === 'finance' ? <DollarSign size={12} color="#c9a84c" /> : <Users size={12} color="#60a5fa" />}
+                {a.type === 'project' ? <CheckCircle size={12} color="#4ade80" /> : a.type === 'finance' ? <DollarSign size={12} color="#3b82f6" /> : <Users size={12} color="#60a5fa" />}
               </div>
               <div style={{ flex: 1 }}>
                 <p style={{ fontSize: 12, color: '#ccc', lineHeight: 1.4 }}>{a.text}</p>

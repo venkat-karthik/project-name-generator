@@ -2,35 +2,59 @@ import { useState } from 'react';
 import { MessageCircle, Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import WebsiteNav from '../../components/WebsiteNav';
 import WebsiteFooter from '../../components/WebsiteFooter';
+import Aurora from '../../components/Aurora';
+import { contactService } from '../../services/contactService';
 
 const OFFICIAL_EMAIL = 'velfound1@gmail.com';
+const AURORA_COLORS = ['#7cff67', '#B497CF', '#5227FF'];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.name && form.email && form.message) {
-      // Send form data to official email
-      const mailtoLink = `mailto:${OFFICIAL_EMAIL}?subject=New Query from ${form.name}&body=Name: ${form.name}%0DEmail: ${form.email}%0DPhone: ${form.phone}%0DService: ${form.service}%0D%0DMessage:%0D${form.message}`;
-      window.location.href = mailtoLink;
+    if (!form.name || !form.email || !form.message) {
+      setError('Please fill in all required fields');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      await contactService.submitContactForm({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        service: form.service,
+        message: form.message,
+      });
       setSent(true);
-      setTimeout(() => {
-        setForm({ name: '', email: '', phone: '', service: '', message: '' });
-        setSent(false);
-      }, 3000);
+      setForm({ name: '', email: '', phone: '', service: '', message: '' });
+      setTimeout(() => setSent(false), 3000);
+    } catch (err) {
+      setError('Failed to send message. Please try again.');
+      console.error('Contact form error:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-      <WebsiteNav />
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '400px', zIndex: 0 }}>
+        <Aurora colorStops={AURORA_COLORS} amplitude={0.8} blend={0.4} speed={0.8} />
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <WebsiteNav />
 
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center' }}>
         <p className="section-tag" style={{ marginBottom: 16 }}>Contact Us</p>
         <h1 style={{ fontSize: 'clamp(36px,5vw,64px)', fontWeight: 700, letterSpacing: '-2px', color: '#f0f0f0', marginBottom: 20 }}>
-          Let's Build Something<br /><span className="gold-text">Remarkable Together</span>
+          Let's Build Something<br /><span className="gold-text" style={{ background: 'linear-gradient(135deg, #7cff67, #B497CF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Remarkable Together</span>
         </h1>
         <p style={{ color: '#555', fontSize: 18, maxWidth: 520, margin: '0 auto' }}>Tell us about your project. We'll respond within 2 hours.</p>
       </section>
@@ -44,7 +68,7 @@ export default function ContactPage() {
 
               <a href="mailto:velfound1@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, textDecoration: 'none' }}>
                 <div style={{ width: 40, height: 40, borderRadius: 10, background: '#1a1a1a', border: '1px solid #222', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Mail size={16} color="#c9a84c" />
+                  <Mail size={16} color="#3b82f6" />
                 </div>
                 <div>
                   <div style={{ fontSize: 11, color: '#444', marginBottom: 2 }}>Email</div>
@@ -64,7 +88,7 @@ export default function ContactPage() {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <div style={{ width: 40, height: 40, borderRadius: 10, background: '#1a1a1a', border: '1px solid #222', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <MapPin size={16} color="#c9a84c" />
+                  <MapPin size={16} color="#3b82f6" />
                 </div>
                 <div>
                   <div style={{ fontSize: 11, color: '#444', marginBottom: 2 }}>Location</div>
@@ -97,24 +121,29 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit}>
                 <h3 style={{ fontSize: 18, fontWeight: 600, color: '#f0f0f0', marginBottom: 24 }}>Tell Us About Your Project</h3>
+                {error && (
+                  <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '8px', padding: '12px', marginBottom: '16px', color: '#ef4444', fontSize: '13px' }}>
+                    {error}
+                  </div>
+                )}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
                   <div>
                     <label className="label">Full Name *</label>
-                    <input className="input" placeholder="Rahul Sharma" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required />
+                    <input className="input" placeholder="Rahul Sharma" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required disabled={loading} />
                   </div>
                   <div>
                     <label className="label">Email *</label>
-                    <input className="input" type="email" placeholder="rahul@company.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required />
+                    <input className="input" type="email" placeholder="rahul@company.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required disabled={loading} />
                   </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
                   <div>
                     <label className="label">Phone</label>
-                    <input className="input" placeholder="+91 98765 43210" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
+                    <input className="input" placeholder="+91 98765 43210" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} disabled={loading} />
                   </div>
                   <div>
                     <label className="label">Service Interested In</label>
-                    <select className="input" value={form.service} onChange={e => setForm({...form, service: e.target.value})}>
+                    <select className="input" value={form.service} onChange={e => setForm({...form, service: e.target.value})} disabled={loading}>
                       <option value="">Select a service</option>
                       <option>AI & Automation</option>
                       <option>AI Voice Systems</option>
@@ -125,10 +154,10 @@ export default function ContactPage() {
                 </div>
                 <div style={{ marginBottom: 24 }}>
                   <label className="label">Tell us about your project *</label>
-                  <textarea className="input" placeholder="Describe what you're trying to automate or build. The more detail, the better..." value={form.message} onChange={e => setForm({...form, message: e.target.value})} required style={{ minHeight: 120 }} />
+                  <textarea className="input" placeholder="Describe what you're trying to automate or build. The more detail, the better..." value={form.message} onChange={e => setForm({...form, message: e.target.value})} required disabled={loading} style={{ minHeight: 120 }} />
                 </div>
-                <button type="submit" className="btn-gold" style={{ width: '100%', justifyContent: 'center', fontSize: 15, padding: '14px' }}>
-                  <Send size={15} /> Send Message
+                <button type="submit" className="btn-gold" style={{ width: '100%', justifyContent: 'center', fontSize: 15, padding: '14px', opacity: loading ? 0.6 : 1 }} disabled={loading}>
+                  <Send size={15} /> {loading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             )}
@@ -145,7 +174,7 @@ export default function ContactPage() {
           background: '#1a1a1a',
           border: '1px solid #2a2a2a',
           borderRadius: '8px',
-          color: '#c9a84c',
+          color: '#3b82f6',
           textDecoration: 'none',
           fontSize: '13px',
           fontWeight: 600,
@@ -153,8 +182,8 @@ export default function ContactPage() {
           cursor: 'pointer',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = '#c9a84c';
-          e.currentTarget.style.background = 'rgba(201,168,76,0.1)';
+          e.currentTarget.style.borderColor = '#3b82f6';
+          e.currentTarget.style.background = 'rgba(59,130,246,0.1)';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.borderColor = '#2a2a2a';
@@ -165,6 +194,7 @@ export default function ContactPage() {
       </section>
 
       <WebsiteFooter />
+      </div>
     </div>
   );
 }

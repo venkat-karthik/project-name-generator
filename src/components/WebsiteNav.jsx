@@ -23,9 +23,12 @@ export default function WebsiteNav() {
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(12px, 3vw, 24px)', height: 'auto', minHeight: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
         {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-          <div style={{ width: 32, height: 32, background: 'linear-gradient(135deg,#c9a84c,#e4c677)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Zap size={16} color="#0a0a0a" fill="#0a0a0a" />
-          </div>
+          <svg width="32" height="32" viewBox="0 0 100 100">
+            <polygon points="20,30 45,30 60,55 45,55" fill="#3b82f6" />
+            <polygon points="55,25 85,25 70,50 55,50" fill="#60a5fa" />
+            <polygon points="45,55 70,55 85,85 60,85" fill="#3b82f6" />
+            <polygon points="30,60 55,60 40,85 15,85" fill="#60a5fa" />
+          </svg>
           <span style={{ fontWeight: 700, fontSize: 'clamp(14px, 3vw, 18px)', letterSpacing: '-0.5px', color: '#f0f0f0' }}>Velfound</span>
         </Link>
 
@@ -59,7 +62,7 @@ export default function WebsiteNav() {
           {links.map(l => (
             <Link key={l.to} to={l.to} onClick={() => setOpen(false)} style={{
               padding: '10px 12px', borderRadius: 8, fontSize: 14, fontWeight: 500, textDecoration: 'none',
-              color: pathname === l.to ? '#c9a84c' : '#888',
+              color: pathname === l.to ? '#3b82f6' : '#888',
               background: pathname === l.to ? '#1a1a1a' : 'transparent',
             }}>
               {l.label}
@@ -67,8 +70,8 @@ export default function WebsiteNav() {
           ))}
           <button onClick={() => { setBookingOpen(true); setOpen(false); }} style={{
             padding: '10px 12px', borderRadius: 8, fontSize: 14, fontWeight: 500,
-            background: 'linear-gradient(135deg, #c9a84c, #e4c677)',
-            color: '#0a0a0a',
+            background: 'linear-gradient(135deg, #3b82f6, #60a5fa)',
+            color: '#fff',
             border: 'none',
             cursor: 'pointer',
             fontWeight: 600,

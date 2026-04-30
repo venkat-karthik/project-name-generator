@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, HelpCircle, MessageCircle } from 'lucide-react';
 import WebsiteNav from '../../components/WebsiteNav';
 import WebsiteFooter from '../../components/WebsiteFooter';
+import Aurora from '../../components/Aurora';
+
+const AURORA_COLORS = ['#7cff67', '#B497CF', '#5227FF'];
 
 const tiers = [
   {
@@ -45,13 +48,17 @@ const faqs = [
 
 export default function PricingPage() {
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-      <WebsiteNav />
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '400px', zIndex: 0 }}>
+        <Aurora colorStops={AURORA_COLORS} amplitude={0.8} blend={0.4} speed={0.8} />
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <WebsiteNav />
 
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center' }}>
         <p className="section-tag" style={{ marginBottom: 16 }}>Pricing</p>
         <h1 style={{ fontSize: 'clamp(36px,5vw,64px)', fontWeight: 700, letterSpacing: '-2px', color: '#f0f0f0', marginBottom: 20 }}>
-          Transparent Pricing.<br /><span className="gold-text">Custom to Your Needs.</span>
+          Transparent Pricing.<br /><span className="gold-text" style={{ background: 'linear-gradient(135deg, #7cff67, #B497CF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Custom to Your Needs.</span>
         </h1>
         <p style={{ color: '#555', fontSize: 18, maxWidth: 520, margin: '0 auto' }}>We don't do one-size-fits-all. Every project is scoped based on your specific needs and goals.</p>
       </section>
@@ -60,19 +67,19 @@ export default function PricingPage() {
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 16, marginBottom: 60 }}>
           {tiers.map(t => (
-            <div key={t.name} className="card" style={{ padding: 32, border: t.highlighted ? '1px solid rgba(201,168,76,0.4)' : '1px solid #1e1e1e', position: 'relative' }}>
+            <div key={t.name} className="card" style={{ padding: 32, border: t.highlighted ? '1px solid rgba(124,255,103,0.4)' : '1px solid #1e1e1e', position: 'relative' }}>
               {t.highlighted && (
-                <div style={{ position: 'absolute', top: -1, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg,#c9a84c,#e4c677)', borderRadius: '0 0 8px 8px', padding: '4px 16px', fontSize: 11, fontWeight: 700, color: '#0a0a0a' }}>MOST POPULAR</div>
+                <div style={{ position: 'absolute', top: -1, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg,#7cff67,#B497CF)', borderRadius: '0 0 8px 8px', padding: '4px 16px', fontSize: 11, fontWeight: 700, color: '#0a0a0a' }}>MOST POPULAR</div>
               )}
               <div style={{ marginTop: t.highlighted ? 12 : 0 }}>
                 <p style={{ color: '#555', fontSize: 12, fontWeight: 600, marginBottom: 8 }}>{t.name}</p>
-                <div className={t.highlighted ? 'gold-text' : ''} style={{ fontSize: 26, fontWeight: 700, letterSpacing: '-0.5px', color: t.highlighted ? undefined : '#f0f0f0', marginBottom: 12 }}>{t.range}</div>
+            <div className={t.highlighted ? 'gold-text' : ''} style={{ fontSize: 26, fontWeight: 700, letterSpacing: '-0.5px', color: t.highlighted ? undefined : '#f0f0f0', marginBottom: 12, background: t.highlighted ? 'linear-gradient(135deg, #7cff67, #B497CF)' : 'none', WebkitBackgroundClip: t.highlighted ? 'text' : 'unset', WebkitTextFillColor: t.highlighted ? 'transparent' : 'unset', backgroundClip: t.highlighted ? 'text' : 'unset' }}>{t.range}</div>
                 <p style={{ color: '#555', fontSize: 14, lineHeight: 1.6, marginBottom: 24 }}>{t.desc}</p>
                 <div style={{ fontSize: 11, color: '#333', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Ideal for: {t.ideal}</div>
                 <div style={{ borderTop: '1px solid #1a1a1a', paddingTop: 20, marginBottom: 24 }}>
                   {t.features.map(f => (
                     <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                      <CheckCircle2 size={14} color={t.highlighted ? '#c9a84c' : '#4ade80'} />
+                      <CheckCircle2 size={14} color={t.highlighted ? '#7cff67' : '#4ade80'} />
                       <span style={{ color: '#777', fontSize: 13 }}>{f}</span>
                     </div>
                   ))}
@@ -126,6 +133,7 @@ export default function PricingPage() {
       </section>
 
       <WebsiteFooter />
+      </div>
     </div>
   );
 }

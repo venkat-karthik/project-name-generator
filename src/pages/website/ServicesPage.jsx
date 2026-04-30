@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Bot, Zap, Globe, BarChart3, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
 import WebsiteNav from '../../components/WebsiteNav';
 import WebsiteFooter from '../../components/WebsiteFooter';
+import Aurora from '../../components/Aurora';
 
 const services = [
   {
@@ -47,8 +48,9 @@ export default function ServicesPage() {
     <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
       <WebsiteNav />
 
-      {/* Header */}
-      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center' }}>
+      {/* Header with Aurora */}
+      <section className="aurora-bg-wrapper" style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center', position: 'relative', minHeight: '400px' }}>
+        <Aurora colorStops={['#7cff67', '#B497CF', '#5227FF']} blend={0.5} amplitude={1.0} speed={0.8} />
         <p className="section-tag" style={{ marginBottom: 16 }}>Our Services</p>
         <h1 style={{ fontSize: 'clamp(36px,5vw,64px)', fontWeight: 700, letterSpacing: '-2px', color: '#f0f0f0', marginBottom: 20 }}>
           Every System We Build Is<br /><span className="gold-text">Built to Scale</span>

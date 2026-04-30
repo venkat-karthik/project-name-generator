@@ -3,67 +3,21 @@ import { create } from 'zustand';
 const EFFORT_WEIGHTS = { none: 0, helped: 0.5, contributed: 1, core: 2, led: 3 };
 
 const initialMembers = [
-  { id: 1, name: 'Arjun Sharma', role: 'Founder', equity: 40, skills: ['Strategy', 'AI', 'BD'], accessLevel: 'founder', active: true, avatar: 'AS' },
-  { id: 2, name: 'Priya Mehta', role: 'Lead Dev', equity: 20, skills: ['React', 'Node.js', 'APIs'], accessLevel: 'core', active: true, avatar: 'PM' },
-  { id: 3, name: 'Rohan Das', role: 'AI Engineer', equity: 15, skills: ['Python', 'ML', 'Voice AI'], accessLevel: 'core', active: true, avatar: 'RD' },
-  { id: 4, name: 'Sneha Patel', role: 'BD Manager', equity: 10, skills: ['Sales', 'CRM', 'Outreach'], accessLevel: 'core', active: true, avatar: 'SP' },
-  { id: 5, name: 'Viewer User', role: 'Intern', equity: 0, skills: [], accessLevel: 'viewer', active: true, avatar: 'VU' },
+  { id: 1, name: 'Kodeboyina Venkat Karthik', role: 'Founder & Lead', equity: 25, skills: ['Strategy', 'AI', 'Business Development'], accessLevel: 'founder', active: true, avatar: 'KV' },
+  { id: 2, name: 'Akshath Tumkur', role: 'Full-Stack Developer', equity: 15, skills: ['React', 'Node.js', 'System Architecture'], accessLevel: 'core', active: true, avatar: 'AT' },
+  { id: 3, name: 'Sahil Ranakoti', role: 'AI & ML Engineer', equity: 15, skills: ['Python', 'ML', 'Voice AI'], accessLevel: 'core', active: true, avatar: 'SR' },
+  { id: 4, name: 'Jayanth Karthik Enaganti', role: 'Product & Strategy', equity: 12, skills: ['Product Strategy', 'UX', 'Client Success'], accessLevel: 'core', active: true, avatar: 'JE' },
+  { id: 5, name: 'Vikas Reddy Kalamalla', role: 'Infrastructure Engineer', equity: 10, skills: ['Cloud', 'DevOps', 'Deployment'], accessLevel: 'core', active: true, avatar: 'VK' },
+  { id: 6, name: 'Nishanth Konakondu', role: 'Backend Engineer', equity: 10, skills: ['APIs', 'Databases', 'Integrations'], accessLevel: 'core', active: true, avatar: 'NK' },
+  { id: 7, name: 'Varshith', role: 'Frontend Engineer', equity: 8, skills: ['React', 'UI/UX', 'Performance'], accessLevel: 'core', active: true, avatar: 'V' },
+  { id: 8, name: 'Gudipati Srinadh', role: 'QA & Testing', equity: 5, skills: ['Testing', 'Quality Assurance', 'Automation'], accessLevel: 'core', active: true, avatar: 'GS' },
 ];
 
-const initialLeads = [
-  { id: 1, name: 'TechStart Solutions', contact: '+91 9876543210', email: 'ceo@techstart.in', source: 'Website', status: 'qualified', assigned: 2, notes: 'Needs AI automation for HR', tags: ['AI', 'HR'], createdAt: '2025-04-10', value: 85000 },
-  { id: 2, name: 'RetailX Corp', contact: '+91 8765432109', email: 'ops@retailx.com', source: 'WhatsApp', status: 'proposal', assigned: 4, notes: 'WhatsApp bot for customer support', tags: ['Voice', 'Support'], createdAt: '2025-04-12', value: 120000 },
-  { id: 3, name: 'FinServe Ltd', contact: '+91 7654321098', email: 'cto@finserve.in', source: 'Referral', status: 'contacted', assigned: 2, notes: 'Web platform rebuild', tags: ['Web'], createdAt: '2025-04-14', value: 200000 },
-  { id: 4, name: 'MedCare Hospitals', contact: '+91 6543210987', email: 'admin@medcare.in', source: 'LinkedIn', status: 'new', assigned: 3, notes: 'AI voice for appointment booking', tags: ['Voice', 'AI'], createdAt: '2025-04-15', value: 150000 },
-  { id: 5, name: 'EduPrime Academy', contact: '+91 5432109876', email: 'info@eduprime.in', source: 'Website', status: 'won', assigned: 4, notes: 'LMS + automation', tags: ['Web', 'Automation'], createdAt: '2025-04-08', value: 95000 },
-  { id: 6, name: 'LogiTrack Inc', contact: '+91 4321098765', email: 'ops@logitrack.in', source: 'Cold Email', status: 'lost', assigned: 2, notes: 'Budget constraints', tags: ['Web'], createdAt: '2025-04-05', value: 60000 },
-];
+const initialLeads = [];
 
-const initialProjects = [
-  {
-    id: 1,
-    name: 'EduPrime LMS',
-    clientId: 5,
-    totalValue: 95000,
-    paymentStatus: 'fully_paid',
-    status: 'approved',
-    companyReserve: 20,
-    bdBonus: { memberId: 4, percent: 5 },
-    teamMembers: [
-      { memberId: 2, effort: 'led', subEmployees: [] },
-      { memberId: 3, effort: 'core', subEmployees: [{ id: 's1', name: 'Dev Intern', percent: 15 }] },
-      { memberId: 4, effort: 'helped', subEmployees: [] },
-    ],
-    version: 1,
-    history: [],
-    createdAt: '2025-04-10',
-    disputes: [],
-  },
-  {
-    id: 2,
-    name: 'RetailX WhatsApp Bot',
-    clientId: 2,
-    totalValue: 120000,
-    paymentStatus: 'partial',
-    status: 'review',
-    companyReserve: 15,
-    bdBonus: { memberId: 4, percent: 8 },
-    teamMembers: [
-      { memberId: 3, effort: 'led', subEmployees: [] },
-      { memberId: 2, effort: 'contributed', subEmployees: [] },
-    ],
-    version: 1,
-    history: [],
-    createdAt: '2025-04-14',
-    disputes: [],
-  },
-];
+const initialProjects = [];
 
-const initialBlogPosts = [
-  { id: 1, title: 'How AI Automation Can Save 20+ Hours/Week for Small Businesses', slug: 'ai-automation-small-businesses', excerpt: 'Discover practical AI automations that eliminate repetitive tasks and free your team to focus on growth.', category: 'AI Automation', readTime: 5, date: '2025-04-20', published: true },
-  { id: 2, title: 'The Rise of AI Voice Agents: Replacing IVR Forever', slug: 'ai-voice-agents-ivr', excerpt: 'AI voice systems are transforming how businesses handle inbound calls — 24/7, no wait times, perfect accuracy.', category: 'AI Voice', readTime: 4, date: '2025-04-15', published: true },
-  { id: 3, title: 'Why Most Business Websites Fail to Convert (And How to Fix It)', slug: 'website-conversion-optimization', excerpt: 'A high-traffic site means nothing without conversions. Learn the design patterns that turn visitors into leads.', category: 'Web Solutions', readTime: 6, date: '2025-04-10', published: true },
-];
+const initialBlogPosts = [];
 
 export const useStore = create((set, get) => ({
   // Auth
@@ -115,19 +69,11 @@ export const useStore = create((set, get) => ({
   updateBlogPost: (id, data) => set(s => ({ blogPosts: s.blogPosts.map(p => p.id === id ? { ...p, ...data } : p) })),
 
   // Audit logs
-  auditLogs: [
-    { id: 1, userId: 1, action: 'Approved project EduPrime LMS', timestamp: '2025-04-20T10:30:00' },
-    { id: 2, userId: 4, action: 'Moved lead RetailX to Proposal', timestamp: '2025-04-19T14:20:00' },
-    { id: 3, userId: 2, action: 'Created project RetailX WhatsApp Bot', timestamp: '2025-04-18T09:15:00' },
-  ],
+  auditLogs: [],
   addAuditLog: (log) => set(s => ({ auditLogs: [{ ...log, id: Date.now(), timestamp: new Date().toISOString() }, ...s.auditLogs] })),
 
   // Notifications
-  notifications: [
-    { id: 1, text: 'New lead: MedCare Hospitals', time: '2h ago', read: false },
-    { id: 2, text: 'Project EduPrime LMS approved', time: '1d ago', read: false },
-    { id: 3, text: 'Follow-up due: FinServe Ltd', time: '2d ago', read: true },
-  ],
+  notifications: [],
   markNotificationRead: (id) => set(s => ({ notifications: s.notifications.map(n => n.id === id ? { ...n, read: true } : n) })),
 
   // Finance calculations

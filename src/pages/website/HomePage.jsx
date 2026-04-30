@@ -4,6 +4,7 @@ import { ArrowRight, MessageCircle, Zap, Bot, Globe, BarChart3, ChevronRight, St
 import WebsiteNav from '../../components/WebsiteNav';
 import WebsiteFooter from '../../components/WebsiteFooter';
 import BookingModal from '../../components/BookingModal';
+import Aurora from '../../components/Aurora';
 
 const services = [
   { icon: Bot, title: 'AI & Automation', desc: 'Replace manual workflows with intelligent systems that operate 24/7 without human intervention.' },
@@ -37,8 +38,9 @@ export default function HomePage() {
     <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
       <WebsiteNav />
 
-      {/* Hero */}
-      <section style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 24px) clamp(50px, 8vw, 80px)', textAlign: 'center' }}>
+      {/* Hero with Aurora */}
+      <section className="aurora-bg-wrapper" style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 24px) clamp(50px, 8vw, 80px)', textAlign: 'center', position: 'relative', minHeight: '500px' }}>
+        <Aurora colorStops={['#7cff67', '#B497CF', '#5227FF']} blend={0.5} amplitude={1.0} speed={0.8} />
         <div className="fade-up">
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 999, border: '1px solid #1e1e1e', background: '#111', marginBottom: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80' }} />
@@ -82,12 +84,12 @@ export default function HomePage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(240px, 45vw, 260px), 1fr))', gap: 16 }}>
           {services.map(s => (
             <div key={s.title} className="card card-hover" style={{ padding: 'clamp(20px, 4vw, 28px)' }}>
-              <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <s.icon size={20} color="#c9a84c" />
+              <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(124, 255, 103, 0.1)', border: '1px solid rgba(124, 255, 103, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <s.icon size={20} color="#7cff67" />
               </div>
               <h3 style={{ fontSize: 'clamp(14px, 3vw, 16px)', fontWeight: 600, color: '#f0f0f0', marginBottom: 10 }}>{s.title}</h3>
               <p style={{ color: '#555', fontSize: 'clamp(12px, 2vw, 14px)', lineHeight: 1.6, marginBottom: 16 }}>{s.desc}</p>
-              <Link to="/services" style={{ color: '#c9a84c', fontSize: 'clamp(11px, 2vw, 13px)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+              <Link to="/services" style={{ color: '#7cff67', fontSize: 'clamp(11px, 2vw, 13px)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
                 Learn more <ChevronRight size={14} />
               </Link>
             </div>
@@ -123,7 +125,7 @@ export default function HomePage() {
             <div key={c.client} className="card" style={{ padding: 'clamp(20px, 4vw, 28px)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
                 <span style={{ fontSize: 'clamp(10px, 2vw, 12px)', color: '#888' }}>{c.client}</span>
-                <span className="badge" style={{ background: 'rgba(201,168,76,0.1)', color: '#c9a84c', border: '1px solid rgba(201,168,76,0.2)', fontSize: 'clamp(10px, 2vw, 11px)' }}>{c.tag}</span>
+                <span className="badge" style={{ background: 'rgba(124, 255, 103, 0.1)', color: '#7cff67', border: '1px solid rgba(124, 255, 103, 0.2)', fontSize: 'clamp(10px, 2vw, 11px)' }}>{c.tag}</span>
               </div>
               <h3 style={{ fontSize: 'clamp(14px, 3vw, 18px)', fontWeight: 600, color: '#f0f0f0', marginBottom: 10 }}>{c.title}</h3>
               <p style={{ color: '#555', fontSize: 'clamp(12px, 2vw, 14px)', lineHeight: 1.6, marginBottom: 24 }}>{c.desc}</p>
@@ -153,7 +155,7 @@ export default function HomePage() {
           {testimonials.map(t => (
             <div key={t.name} className="card" style={{ padding: 'clamp(20px, 4vw, 28px)' }}>
               <div style={{ display: 'flex', gap: 2, marginBottom: 16 }}>
-                {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#c9a84c" color="#c9a84c" />)}
+                {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#7cff67" color="#7cff67" />)}
               </div>
               <p style={{ color: '#888', fontSize: 'clamp(12px, 2vw, 14px)', lineHeight: 1.7, marginBottom: 20, fontStyle: 'italic' }}>"{t.text}"</p>
               <div>

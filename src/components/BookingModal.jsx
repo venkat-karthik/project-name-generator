@@ -24,13 +24,10 @@ export default function BookingModal({ isOpen, onClose }) {
     setLoading(true);
 
     try {
-      // Add booking using the service
       await addBooking(formData);
-
       setSuccess(true);
       setFormData({ name: '', email: '', phone: '', date: '', time: '', message: '' });
       
-      // Close modal after 2 seconds
       setTimeout(() => {
         onClose();
         setSuccess(false);
@@ -68,7 +65,6 @@ export default function BookingModal({ isOpen, onClose }) {
         overflowY: 'auto',
         animation: 'fadeUp 0.3s ease-out',
       }}>
-        {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
           <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#f0f0f0' }}>Book a Call</h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#777', cursor: 'pointer' }}>
@@ -85,21 +81,20 @@ export default function BookingModal({ isOpen, onClose }) {
             <div style={{
               width: '60px',
               height: '60px',
-              background: 'linear-gradient(135deg, #c9a84c, #e4c677)',
+              background: 'linear-gradient(135deg, #3b82f6, #60a5fa)',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 16px',
             }}>
-              <Calendar size={32} color="#0a0a0a" />
+              <Calendar size={32} color="#fff" />
             </div>
             <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#f0f0f0', marginBottom: '8px' }}>Booking Confirmed!</h3>
             <p style={{ color: '#888', fontSize: '14px' }}>We'll contact you shortly to confirm your call.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {/* Name */}
             <div>
               <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#888', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Full Name
@@ -122,12 +117,11 @@ export default function BookingModal({ isOpen, onClose }) {
                   outline: 'none',
                   transition: 'all 0.2s ease',
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#c9a84c'}
+                onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
                 onBlur={(e) => e.target.style.borderColor = '#1a1a1a'}
               />
             </div>
 
-            {/* Email */}
             <div>
               <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#888', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Email
@@ -150,12 +144,11 @@ export default function BookingModal({ isOpen, onClose }) {
                   outline: 'none',
                   transition: 'all 0.2s ease',
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#c9a84c'}
+                onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
                 onBlur={(e) => e.target.style.borderColor = '#1a1a1a'}
               />
             </div>
 
-            {/* Phone */}
             <div>
               <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#888', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Phone Number
@@ -178,12 +171,11 @@ export default function BookingModal({ isOpen, onClose }) {
                   outline: 'none',
                   transition: 'all 0.2s ease',
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#c9a84c'}
+                onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
                 onBlur={(e) => e.target.style.borderColor = '#1a1a1a'}
               />
             </div>
 
-            {/* Date */}
             <div>
               <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#888', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Preferred Date
@@ -205,12 +197,11 @@ export default function BookingModal({ isOpen, onClose }) {
                   outline: 'none',
                   transition: 'all 0.2s ease',
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#c9a84c'}
+                onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
                 onBlur={(e) => e.target.style.borderColor = '#1a1a1a'}
               />
             </div>
 
-            {/* Time */}
             <div>
               <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#888', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Preferred Time
@@ -232,12 +223,11 @@ export default function BookingModal({ isOpen, onClose }) {
                   outline: 'none',
                   transition: 'all 0.2s ease',
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#c9a84c'}
+                onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
                 onBlur={(e) => e.target.style.borderColor = '#1a1a1a'}
               />
             </div>
 
-            {/* Message */}
             <div>
               <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#888', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Message (Optional)
@@ -260,18 +250,17 @@ export default function BookingModal({ isOpen, onClose }) {
                   resize: 'vertical',
                   minHeight: '80px',
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#c9a84c'}
+                onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
                 onBlur={(e) => e.target.style.borderColor = '#1a1a1a'}
               />
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
               style={{
-                background: loading ? '#666' : 'linear-gradient(135deg, #c9a84c, #e4c677)',
-                color: '#0a0a0a',
+                background: loading ? '#666' : 'linear-gradient(135deg, #3b82f6, #60a5fa)',
+                color: '#fff',
                 fontWeight: 600,
                 borderRadius: '999px',
                 padding: '12px 28px',

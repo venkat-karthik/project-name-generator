@@ -57,9 +57,12 @@ export default function AdminLayout() {
       }}>
         {/* Logo */}
         <div style={{ padding: '16px 16px', borderBottom: '1px solid #141414', display: 'flex', alignItems: 'center', gap: 10, minHeight: 60 }}>
-          <div style={{ width: 28, height: 28, flexShrink: 0, background: 'linear-gradient(135deg,#c9a84c,#e4c677)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Zap size={14} color="#0a0a0a" fill="#0a0a0a" />
-          </div>
+          <svg width="28" height="28" viewBox="0 0 100 100" style={{ flexShrink: 0 }}>
+            <polygon points="20,30 45,30 60,55 45,55" fill="#3b82f6" />
+            <polygon points="55,25 85,25 70,50 55,50" fill="#60a5fa" />
+            <polygon points="45,55 70,55 85,85 60,85" fill="#3b82f6" />
+            <polygon points="30,60 55,60 40,85 15,85" fill="#60a5fa" />
+          </svg>
           {sidebarOpen && <span style={{ fontWeight: 700, fontSize: 15, letterSpacing: '-0.3px', color: '#f0f0f0', whiteSpace: 'nowrap' }}>Velfound</span>}
         </div>
 
@@ -99,13 +102,13 @@ export default function AdminLayout() {
         <div style={{ padding: '12px 8px', borderTop: '1px solid #141414' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8, cursor: 'pointer', transition: 'background 0.15s' }}
             onClick={() => setUserMenuOpen(!userMenuOpen)}>
-            <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#c9a84c,#e4c677)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#0a0a0a', flexShrink: 0 }}>
+            <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#fff', flexShrink: 0 }}>
               {adminUser?.displayName?.split(' ').map(n => n[0]).join('').toUpperCase() || 'A'}
             </div>
             {sidebarOpen && (
               <div style={{ flex: 1, overflow: 'hidden' }}>
                 <div style={{ fontSize: 12, fontWeight: 600, color: '#f0f0f0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{adminUser?.displayName || 'Admin'}</div>
-                <div style={{ fontSize: 10, color: '#c9a84c', textTransform: 'capitalize' }}>Founder</div>
+                <div style={{ fontSize: 10, color: '#3b82f6', textTransform: 'capitalize' }}>Founder</div>
               </div>
             )}
           </div>
@@ -155,14 +158,14 @@ export default function AdminLayout() {
           <div style={{ position: 'relative' }}>
             <button onClick={() => setNotifOpen(!notifOpen)} style={{ position: 'relative', background: 'none', border: '1px solid #1e1e1e', borderRadius: 8, padding: '7px', cursor: 'pointer', color: '#666', display: 'flex' }}>
               <Bell size={16} />
-              {unread > 0 && <span style={{ position: 'absolute', top: -4, right: -4, width: 16, height: 16, borderRadius: '50%', background: '#c9a84c', color: '#0a0a0a', fontSize: 9, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{unread}</span>}
+              {unread > 0 && <span style={{ position: 'absolute', top: -4, right: -4, width: 16, height: 16, borderRadius: '50%', background: '#3b82f6', color: '#fff', fontSize: 9, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{unread}</span>}
             </button>
             {notifOpen && (
               <div style={{ position: 'absolute', top: 44, right: 0, width: 300, background: '#111', border: '1px solid #222', borderRadius: 12, padding: 12, zIndex: 50, boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
                 <p style={{ fontSize: 12, fontWeight: 600, color: '#f0f0f0', marginBottom: 12, padding: '4px 8px' }}>Notifications</p>
                 {notifications.map(n => (
                   <div key={n.id} style={{ padding: '10px 8px', borderRadius: 8, background: n.read ? 'none' : '#1a1a1a', marginBottom: 4, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                    {!n.read && <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#c9a84c', flexShrink: 0, marginTop: 4 }} />}
+                    {!n.read && <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b82f6', flexShrink: 0, marginTop: 4 }} />}
                     <div style={{ flex: 1 }}>
                       <p style={{ fontSize: 12, color: '#ccc', lineHeight: 1.4 }}>{n.text}</p>
                       <p style={{ fontSize: 11, color: '#444', marginTop: 2 }}>{n.time}</p>
@@ -175,9 +178,9 @@ export default function AdminLayout() {
 
           {/* Role Badge */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: '#111', border: '1px solid #1e1e1e', borderRadius: 8 }}>
-            <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg,#c9a84c,#e4c677)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#0a0a0a' }}>{currentUser?.avatar}</div>
+            <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#fff' }}>{currentUser?.avatar}</div>
             <span style={{ fontSize: 12, color: '#888' }}>{currentUser?.name}</span>
-            <span className="badge" style={{ background: isFounder ? 'rgba(201,168,76,0.15)' : '#1a1a1a', color: isFounder ? '#c9a84c' : '#666', fontSize: 10 }}>{currentUser?.accessLevel}</span>
+            <span className="badge" style={{ background: isFounder ? 'rgba(59,130,246,0.15)' : '#1a1a1a', color: isFounder ? '#3b82f6' : '#666', fontSize: 10 }}>{currentUser?.accessLevel}</span>
           </div>
         </header>
 
