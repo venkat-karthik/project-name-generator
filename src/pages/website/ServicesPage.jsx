@@ -45,31 +45,34 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-      <WebsiteNav />
-
-      {/* Header with Aurora */}
-      <section className="aurora-bg-wrapper" style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center', position: 'relative', minHeight: '400px' }}>
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
         <Aurora colorStops={['#7cff67', '#B497CF', '#5227FF']} blend={0.5} amplitude={1.0} speed={0.8} />
-        <p className="section-tag" style={{ marginBottom: 16 }}>Our Services</p>
-        <h1 style={{ fontSize: 'clamp(36px,5vw,64px)', fontWeight: 700, letterSpacing: '-2px', color: '#f0f0f0', marginBottom: 20 }}>
-          Every System We Build Is<br /><span className="gold-text">Built to Scale</span>
-        </h1>
-        <p style={{ color: '#555', fontSize: 18, maxWidth: 520, margin: '0 auto' }}>
-          We don't sell templates. We build custom AI systems, voice agents, and web solutions engineered for your specific business.
-        </p>
-      </section>
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <WebsiteNav />
 
-      {/* Services */}
-      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px 80px' }}>
-        {services.map((s, i) => (
-          <div key={s.tag} className="card" style={{ padding: '48px 40px', marginBottom: 16 }}>
+        {/* Header with Aurora */}
+        <section className="aurora-bg-wrapper" style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center', position: 'relative', minHeight: '400px' }}>
+          <p className="section-tag fade-up" style={{ marginBottom: 16 }}>Our Services</p>
+          <h1 className="fade-up" style={{ fontSize: 'clamp(36px,5vw,64px)', fontWeight: 700, letterSpacing: '-2px', color: '#f0f0f0', marginBottom: 20, animationDelay: '0.1s' }}>
+            Every System We Build Is<br /><span className="gold-text" style={{ background: 'linear-gradient(135deg, #7cff67, #B497CF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Built to Scale</span>
+          </h1>
+          <p className="fade-up" style={{ color: '#555', fontSize: 18, maxWidth: 520, margin: '0 auto', animationDelay: '0.2s' }}>
+            We don't sell templates. We build custom AI systems, voice agents, and web solutions engineered for your specific business.
+          </p>
+        </section>
+
+        {/* Services */}
+        <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px 80px' }}>
+          {services.map((s, i) => (
+            <div key={s.tag} className="card scale-in" style={{ padding: '48px 40px', marginBottom: 16, animationDelay: `${i * 0.1}s` }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
               {/* Left */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-                  <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <s.icon size={22} color="#c9a84c" />
+                  <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(124, 255, 103, 0.1)', border: '1px solid rgba(124, 255, 103, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <s.icon size={22} color="#7cff67" />
                   </div>
                   <span className="section-tag">{s.tag}</span>
                 </div>
@@ -79,7 +82,7 @@ export default function ServicesPage() {
                   <p style={{ color: '#777', fontSize: 14, lineHeight: 1.7 }}>{s.problem}</p>
                 </div>
                 <div style={{ marginBottom: 20 }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#c9a84c', marginBottom: 8 }}>OUR SOLUTION</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7cff67', marginBottom: 8 }}>OUR SOLUTION</div>
                   <p style={{ color: '#888', fontSize: 14, lineHeight: 1.7 }}>{s.solution}</p>
                 </div>
                 <div style={{ marginBottom: 28 }}>
@@ -97,7 +100,7 @@ export default function ServicesPage() {
                 <p style={{ color: '#555', fontSize: 12, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 20 }}>What's Included</p>
                 {s.features.map(f => (
                   <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-                    <CheckCircle2 size={15} color="#c9a84c" />
+                    <CheckCircle2 size={15} color="#7cff67" />
                     <span style={{ color: '#888', fontSize: 14 }}>{f}</span>
                   </div>
                 ))}
@@ -109,17 +112,18 @@ export default function ServicesPage() {
 
       {/* CTA */}
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px 80px', textAlign: 'center' }}>
-        <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 20, padding: 56 }}>
+        <div className="fade-up" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 20, padding: 56 }}>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#f0f0f0', letterSpacing: '-1px', marginBottom: 12 }}>Not Sure What You Need?</h2>
           <p style={{ color: '#555', fontSize: 16, marginBottom: 32 }}>Book a free strategy call and we'll tell you exactly what to build and why.</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button className="btn-gold" onClick={() => window.open('https://calendly.com', '_blank')}>Book Free Strategy Call <ArrowRight size={14} /></button>
-            <button className="btn-outline" onClick={() => window.open('https://wa.me/919876543210', '_blank')}><MessageCircle size={14} /> WhatsApp Us</button>
+            <button className="btn-outline" onClick={() => window.open('https://wa.me/918309827125', '_blank')}><MessageCircle size={14} /> WhatsApp Us</button>
           </div>
         </div>
       </section>
 
       <WebsiteFooter />
+      </div>
     </div>
   );
 }

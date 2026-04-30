@@ -127,7 +127,7 @@ export default function PricingPage() {
           <p style={{ color: '#555', fontSize: 16, marginBottom: 32 }}>Book a free call. We'll scope your project and give you a fixed quote with no surprises.</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button className="btn-gold" onClick={() => window.open('https://calendly.com', '_blank')} style={{ fontSize: 15, padding: '14px 32px' }}>Book Free Strategy Call <ArrowRight size={16} /></button>
-            <button className="btn-outline" onClick={() => window.open('https://wa.me/919876543210', '_blank')} style={{ fontSize: 15, padding: '14px 32px' }}><MessageCircle size={14} /> WhatsApp Us</button>
+            <button className="btn-outline" onClick={() => window.open('https://wa.me/918309827125', '_blank')} style={{ fontSize: 15, padding: '14px 32px' }}><MessageCircle size={14} /> WhatsApp Us</button>
           </div>
         </div>
       </section>

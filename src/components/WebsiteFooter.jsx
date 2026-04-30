@@ -50,7 +50,7 @@ export default function WebsiteFooter() {
           <div>
             <p style={{ color: '#f0f0f0', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>Get in Touch</p>
             <a href="mailto:velfound1@gmail.com" style={{ display: 'block', color: '#555', fontSize: 13, marginBottom: 10, textDecoration: 'none' }}>velfound1@gmail.com</a>
-            <button onClick={() => window.open('https://wa.me/919876543210', '_blank')} style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#4ade80', fontSize: 13, background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginBottom: 10 }}>
+            <button onClick={() => window.open('https://wa.me/918309827125', '_blank')} style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#4ade80', fontSize: 13, background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginBottom: 10 }}>
               <MessageCircle size={14} /> WhatsApp Us
             </button>
             <p style={{ color: '#444', fontSize: 12 }}>Response within 2 hours</p>

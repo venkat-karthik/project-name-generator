@@ -35,12 +35,15 @@ export default function HomePage() {
   const [bookingOpen, setBookingOpen] = useState(false);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-      <WebsiteNav />
-
-      {/* Hero with Aurora */}
-      <section className="aurora-bg-wrapper" style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 24px) clamp(50px, 8vw, 80px)', textAlign: 'center', position: 'relative', minHeight: '500px' }}>
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
         <Aurora colorStops={['#7cff67', '#B497CF', '#5227FF']} blend={0.5} amplitude={1.0} speed={0.8} />
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <WebsiteNav />
+
+        {/* Hero with Aurora */}
+        <section className="aurora-bg-wrapper" style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 100px) clamp(16px, 5vw, 24px) clamp(50px, 8vw, 80px)', textAlign: 'center', position: 'relative', minHeight: '500px' }}>
         <div className="fade-up">
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 999, border: '1px solid #1e1e1e', background: '#111', marginBottom: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80' }} />
@@ -78,12 +81,12 @@ export default function HomePage() {
       {/* Services Overview */}
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 80px) clamp(16px, 5vw, 24px)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 56px)' }}>
-          <p className="section-tag" style={{ marginBottom: 12 }}>What We Build</p>
-          <h2 style={{ fontSize: 'clamp(24px, 5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#f0f0f0' }}>Automation Systems That Work While You Sleep</h2>
+          <p className="section-tag fade-up" style={{ marginBottom: 12 }}>What We Build</p>
+          <h2 className="fade-up" style={{ fontSize: 'clamp(24px, 5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#f0f0f0', animationDelay: '0.1s' }}>Automation Systems That Work While You Sleep</h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(240px, 45vw, 260px), 1fr))', gap: 16 }}>
-          {services.map(s => (
-            <div key={s.title} className="card card-hover" style={{ padding: 'clamp(20px, 4vw, 28px)' }}>
+          {services.map((s, idx) => (
+            <div key={s.title} className="card card-hover scale-in" style={{ padding: 'clamp(20px, 4vw, 28px)', animationDelay: `${idx * 0.05}s` }}>
               <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(124, 255, 103, 0.1)', border: '1px solid rgba(124, 255, 103, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                 <s.icon size={20} color="#7cff67" />
               </div>
@@ -100,12 +103,12 @@ export default function HomePage() {
       {/* How It Works */}
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 80px) clamp(16px, 5vw, 24px)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 56px)' }}>
-          <p className="section-tag" style={{ marginBottom: 12 }}>The Process</p>
-          <h2 style={{ fontSize: 'clamp(24px, 5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#f0f0f0' }}>From Idea to Automated System in 3 Steps</h2>
+          <p className="section-tag fade-up" style={{ marginBottom: 12 }}>The Process</p>
+          <h2 className="fade-up" style={{ fontSize: 'clamp(24px, 5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#f0f0f0', animationDelay: '0.1s' }}>From Idea to Automated System in 3 Steps</h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(240px, 45vw, 280px), 1fr))', gap: 2 }}>
           {steps.map((s, i) => (
-            <div key={s.n} style={{ position: 'relative', padding: 'clamp(20px, 4vw, 32px)', background: '#0e0e0e', border: '1px solid #1a1a1a', borderRadius: i === 0 ? '12px 0 0 12px' : i === 2 ? '0 12px 12px 0' : 0 }}>
+            <div key={s.n} className="slide-in-left" style={{ position: 'relative', padding: 'clamp(20px, 4vw, 32px)', background: '#0e0e0e', border: '1px solid #1a1a1a', borderRadius: i === 0 ? '12px 0 0 12px' : i === 2 ? '0 12px 12px 0' : 0, animationDelay: `${i * 0.1}s` }}>
               <div style={{ fontSize: 'clamp(32px, 6vw, 48px)', fontWeight: 800, color: '#1a1a1a', letterSpacing: '-2px', marginBottom: 16 }}>{s.n}</div>
               <h3 style={{ fontSize: 'clamp(14px, 3vw, 18px)', fontWeight: 600, color: '#f0f0f0', marginBottom: 10 }}>{s.title}</h3>
               <p style={{ color: '#555', fontSize: 'clamp(12px, 2vw, 14px)', lineHeight: 1.6 }}>{s.desc}</p>
@@ -117,12 +120,12 @@ export default function HomePage() {
       {/* Case Studies */}
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 80px) clamp(16px, 5vw, 24px)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 56px)' }}>
-          <p className="section-tag" style={{ marginBottom: 12 }}>Case Studies</p>
-          <h2 style={{ fontSize: 'clamp(24px, 5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#f0f0f0' }}>Real Results for Real Businesses</h2>
+          <p className="section-tag fade-up" style={{ marginBottom: 12 }}>Case Studies</p>
+          <h2 className="fade-up" style={{ fontSize: 'clamp(24px, 5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#f0f0f0', animationDelay: '0.1s' }}>Real Results for Real Businesses</h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(240px, 45vw, 300px), 1fr))', gap: 16 }}>
-          {caseStudies.map(c => (
-            <div key={c.client} className="card" style={{ padding: 'clamp(20px, 4vw, 28px)' }}>
+          {caseStudies.map((c, idx) => (
+            <div key={c.client} className="card scale-in" style={{ padding: 'clamp(20px, 4vw, 28px)', animationDelay: `${idx * 0.05}s` }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
                 <span style={{ fontSize: 'clamp(10px, 2vw, 12px)', color: '#888' }}>{c.client}</span>
                 <span className="badge" style={{ background: 'rgba(124, 255, 103, 0.1)', color: '#7cff67', border: '1px solid rgba(124, 255, 103, 0.2)', fontSize: 'clamp(10px, 2vw, 11px)' }}>{c.tag}</span>
@@ -148,12 +151,12 @@ export default function HomePage() {
       {/* Testimonials */}
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 80px) clamp(16px, 5vw, 24px)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 56px)' }}>
-          <p className="section-tag" style={{ marginBottom: 12 }}>Testimonials</p>
-          <h2 style={{ fontSize: 'clamp(24px, 5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#f0f0f0' }}>What Our Clients Say</h2>
+          <p className="section-tag fade-up" style={{ marginBottom: 12 }}>Testimonials</p>
+          <h2 className="fade-up" style={{ fontSize: 'clamp(24px, 5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#f0f0f0', animationDelay: '0.1s' }}>What Our Clients Say</h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(240px, 45vw, 280px), 1fr))', gap: 16 }}>
-          {testimonials.map(t => (
-            <div key={t.name} className="card" style={{ padding: 'clamp(20px, 4vw, 28px)' }}>
+          {testimonials.map((t, idx) => (
+            <div key={t.name} className="card scale-in" style={{ padding: 'clamp(20px, 4vw, 28px)', animationDelay: `${idx * 0.05}s` }}>
               <div style={{ display: 'flex', gap: 2, marginBottom: 16 }}>
                 {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#7cff67" color="#7cff67" />)}
               </div>
@@ -178,7 +181,7 @@ export default function HomePage() {
             <button className="btn-gold" onClick={() => setBookingOpen(true)} style={{ fontSize: 'clamp(12px, 2vw, 15px)', padding: 'clamp(10px, 2vw, 14px) clamp(16px, 3vw, 32px)' }}>
               Book a Free Call <ArrowRight size={16} />
             </button>
-            <button className="btn-outline" onClick={() => window.open('https://wa.me/919876543210', '_blank')} style={{ fontSize: 'clamp(12px, 2vw, 15px)', padding: 'clamp(10px, 2vw, 14px) clamp(16px, 3vw, 32px)' }}>
+            <button className="btn-outline" onClick={() => window.open('https://wa.me/918309827125', '_blank')} style={{ fontSize: 'clamp(12px, 2vw, 15px)', padding: 'clamp(10px, 2vw, 14px) clamp(16px, 3vw, 32px)' }}>
               <MessageCircle size={16} /> Chat on WhatsApp
             </button>
           </div>
@@ -187,6 +190,7 @@ export default function HomePage() {
 
       <WebsiteFooter />
       <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+      </div>
     </div>
   );
 }
