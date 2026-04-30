@@ -54,10 +54,6 @@ export default function WebsiteNav() {
           </button>
         </div>
         
-        {/* Hidden Admin Login - Only accessible via direct URL */}
-        <div style={{ display: 'none' }}>
-          <Link to="/admin/login">Admin</Link>
-        </div>
       </div>
 
       {/* Mobile Menu */}
