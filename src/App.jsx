@@ -4,7 +4,7 @@ import { AdminAuthProvider } from './context/AdminAuthContext';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 
 // Website Pages
-import HomePage from './pages/website/HomePage';
+import HomePage from './pages/website/HomePageApple';
 import ServicesPage from './pages/website/ServicesPage';
 import SolutionsPage from './pages/website/SolutionsPage';
 import PricingPage from './pages/website/PricingPage';
