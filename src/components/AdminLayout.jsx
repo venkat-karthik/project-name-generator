@@ -11,6 +11,7 @@ import { useAdminAuth } from '../context/AdminAuthContext';
 const navItems = [
   { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/admin/bookings', icon: Calendar, label: 'Bookings' },
+  { to: '/admin/portfolio-projects', icon: FolderKanban, label: 'Portfolio Projects' },
   { to: '/admin/crm', icon: FolderKanban, label: 'CRM / Leads' },
   { to: '/admin/projects', icon: FileText, label: 'Projects' },
   { to: '/admin/team', icon: TrendingUp, label: 'Team Performance' },

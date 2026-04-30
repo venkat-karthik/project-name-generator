@@ -19,6 +19,7 @@ const initialProjects = [];
 
 const initialBlogPosts = [];
 
+// NEW: Initial portfolio projects for homepage
 const initialPortfolioProjects = [
   {
     id: 1704067200000,
@@ -124,7 +125,7 @@ export const useStore = create((set, get) => ({
   notifications: [],
   markNotificationRead: (id) => set(s => ({ notifications: s.notifications.map(n => n.id === id ? { ...n, read: true } : n) })),
 
-  // Portfolio Projects
+  // NEW: Portfolio Projects (for homepage)
   portfolioProjects: initialPortfolioProjects,
   
   addPortfolioProject: (project) => set(s => ({
