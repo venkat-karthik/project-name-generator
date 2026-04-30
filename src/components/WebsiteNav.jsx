@@ -45,9 +45,6 @@ export default function WebsiteNav() {
 
         {/* CTA + Mobile */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Link to="/admin/login" style={{ fontSize: 13, padding: '8px 16px', color: '#888', textDecoration: 'none', borderRadius: 8, transition: 'all 0.2s', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.color = '#c9a84c'; e.currentTarget.style.background = '#1a1a1a'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#888'; e.currentTarget.style.background = 'transparent'; }}>
-            Admin
-          </Link>
           <button id="nav-cta-desktop" className="btn-gold" style={{ fontSize: 13, padding: '8px 20px' }} onClick={() => setBookingOpen(true)}>Book a Call</button>
           <button data-mobile-menu-btn onClick={() => setOpen(!open)} style={{ background: 'none', border: 'none', color: '#777', cursor: 'pointer', display: 'flex' }}>
             {open ? <X size={20} /> : <Menu size={20} />}
@@ -68,13 +65,6 @@ export default function WebsiteNav() {
               {l.label}
             </Link>
           ))}
-          <Link to="/admin/login" onClick={() => setOpen(false)} style={{
-            padding: '10px 12px', borderRadius: 8, fontSize: 14, fontWeight: 500, textDecoration: 'none',
-            color: '#888',
-            background: 'transparent',
-          }}>
-            Admin Login
-          </Link>
           <button onClick={() => { setBookingOpen(true); setOpen(false); }} style={{
             padding: '10px 12px', borderRadius: 8, fontSize: 14, fontWeight: 500,
             background: 'linear-gradient(135deg, #c9a84c, #e4c677)',

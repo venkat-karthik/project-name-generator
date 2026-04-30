@@ -136,6 +136,34 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Admin Access Section */}
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '60px 24px', textAlign: 'center', borderTop: '1px solid #1a1a1a' }}>
+        <p style={{ color: '#666', fontSize: 13, marginBottom: 16 }}>Team member?</p>
+        <a href="/admin/login" style={{
+          display: 'inline-block',
+          padding: '10px 24px',
+          background: '#1a1a1a',
+          border: '1px solid #2a2a2a',
+          borderRadius: '8px',
+          color: '#c9a84c',
+          textDecoration: 'none',
+          fontSize: '13px',
+          fontWeight: 600,
+          transition: 'all 0.2s',
+          cursor: 'pointer',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = '#c9a84c';
+          e.currentTarget.style.background = 'rgba(201,168,76,0.1)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = '#2a2a2a';
+          e.currentTarget.style.background = '#1a1a1a';
+        }}>
+          Admin Login
+        </a>
+      </section>
+
       <WebsiteFooter />
     </div>
   );
