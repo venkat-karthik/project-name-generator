@@ -25,7 +25,7 @@ const services = [
   {
     icon: Globe,
     tag: 'Web Solutions',
-    problem: 'Your website looks outdated, loads slowly, and fails to convert visitors into leads. You're losing business every day.',
+    problem: `Your website looks outdated, loads slowly, and fails to convert visitors into leads. You're losing business every day.`,
     solution: 'We build conversion-focused web platforms — landing pages, full websites, SaaS products, and internal tools.',
     outcome: 'Average 3–5x improvement in lead conversion rate. Pages that load in under 1.5 seconds.',
     features: ['Conversion-optimised landing pages', 'Full business websites', 'SaaS & web app development', 'Internal tools & dashboards', 'SEO-first architecture', 'Analytics & tracking setup'],
@@ -34,7 +34,7 @@ const services = [
   {
     icon: BarChart3,
     tag: 'Audit & Strategy',
-    problem: 'You know you need automation but don't know where to start. Your tech stack is a mess and ROI is unclear.',
+    problem: `You know you need automation but don't know where to start. Your tech stack is a mess and ROI is unclear.`,
     solution: 'We do a deep-dive audit of your entire business operations and deliver a prioritised automation roadmap.',
     outcome: 'Clear 90-day plan with ROI projections for each initiative. Know exactly what to build and in what order.',
     features: ['Operations workflow mapping', 'Tech stack audit & recommendations', 'Automation opportunity ranking', 'ROI projections per initiative', '90-day roadmap delivery', 'Monthly advisory calls'],

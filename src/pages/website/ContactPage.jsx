@@ -3,13 +3,24 @@ import { MessageCircle, Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-r
 import WebsiteNav from '../../components/WebsiteNav';
 import WebsiteFooter from '../../components/WebsiteFooter';
 
+const OFFICIAL_EMAIL = 'velfound1@gmail.com';
+
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' });
   const [sent, setSent] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSent(true);
+    if (form.name && form.email && form.message) {
+      // Send form data to official email
+      const mailtoLink = `mailto:${OFFICIAL_EMAIL}?subject=New Query from ${form.name}&body=Name: ${form.name}%0DEmail: ${form.email}%0DPhone: ${form.phone}%0DService: ${form.service}%0D%0DMessage:%0D${form.message}`;
+      window.location.href = mailtoLink;
+      setSent(true);
+      setTimeout(() => {
+        setForm({ name: '', email: '', phone: '', service: '', message: '' });
+        setSent(false);
+      }, 3000);
+    }
   };
 
   return (
@@ -31,23 +42,23 @@ export default function ContactPage() {
             <div className="card" style={{ padding: 32, marginBottom: 16 }}>
               <h3 style={{ fontSize: 16, fontWeight: 600, color: '#f0f0f0', marginBottom: 20 }}>Get In Touch</h3>
 
-              <a href="mailto:hello@velfound.com" style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, textDecoration: 'none' }}>
+              <a href="mailto:velfound1@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, textDecoration: 'none' }}>
                 <div style={{ width: 40, height: 40, borderRadius: 10, background: '#1a1a1a', border: '1px solid #222', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Mail size={16} color="#c9a84c" />
                 </div>
                 <div>
                   <div style={{ fontSize: 11, color: '#444', marginBottom: 2 }}>Email</div>
-                  <div style={{ fontSize: 14, color: '#f0f0f0' }}>hello@velfound.com</div>
+                  <div style={{ fontSize: 14, color: '#f0f0f0' }}>velfound1@gmail.com</div>
                 </div>
               </a>
 
-              <button onClick={() => window.open('https://wa.me/919876543210', '_blank')} style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, background: 'none', border: 'none', cursor: 'pointer', padding: 0, width: '100%' }}>
+              <button onClick={() => window.open('https://wa.me/918309827125', '_blank')} style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, background: 'none', border: 'none', cursor: 'pointer', padding: 0, width: '100%' }}>
                 <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(74,222,128,0.1)', border: '1px solid rgba(74,222,128,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <MessageCircle size={16} color="#4ade80" />
                 </div>
                 <div style={{ textAlign: 'left' }}>
                   <div style={{ fontSize: 11, color: '#444', marginBottom: 2 }}>WhatsApp</div>
-                  <div style={{ fontSize: 14, color: '#f0f0f0' }}>+91 98765 43210</div>
+                  <div style={{ fontSize: 14, color: '#f0f0f0' }}>+91 83098 27125</div>
                 </div>
               </button>
 

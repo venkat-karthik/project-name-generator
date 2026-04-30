@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Zap } from 'lucide-react';
+import BookingModal from './BookingModal';
 
 const links = [
   { to: '/', label: 'Home' },
   { to: '/services', label: 'Services' },
-  { to: '/portfolio', label: 'Portfolio' },
+  { to: '/solutions', label: 'Solutions' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/blog', label: 'Blog' },
   { to: '/about', label: 'About' },
@@ -14,17 +15,18 @@ const links = [
 
 export default function WebsiteNav() {
   const [open, setOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
   const { pathname } = useLocation();
 
   return (
     <nav style={{ borderBottom: '1px solid #1a1a1a', background: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 40 }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(12px, 3vw, 24px)', height: 'auto', minHeight: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
         {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 32, height: 32, background: 'linear-gradient(135deg,#c9a84c,#e4c677)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Zap size={16} color="#0a0a0a" fill="#0a0a0a" />
           </div>
-          <span style={{ fontWeight: 700, fontSize: 18, letterSpacing: '-0.5px', color: '#f0f0f0' }}>Velfound</span>
+          <span style={{ fontWeight: 700, fontSize: 'clamp(14px, 3vw, 18px)', letterSpacing: '-0.5px', color: '#f0f0f0' }}>Velfound</span>
         </Link>
 
         {/* Desktop Links */}
@@ -43,17 +45,21 @@ export default function WebsiteNav() {
 
         {/* CTA + Mobile */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Link to="/contact" className="btn-gold" style={{ fontSize: 13, padding: '8px 20px', display: 'none' }} id="nav-cta">Book a Call</Link>
-          <button className="btn-gold" style={{ fontSize: 13, padding: '8px 20px' }} onClick={() => window.open('https://calendly.com', '_blank')}>Book a Call</button>
-          <button onClick={() => setOpen(!open)} style={{ background: 'none', border: 'none', color: '#777', cursor: 'pointer', display: 'flex' }}>
+          <button id="nav-cta-desktop" className="btn-gold" style={{ fontSize: 13, padding: '8px 20px' }} onClick={() => setBookingOpen(true)}>Book a Call</button>
+          <button data-mobile-menu-btn onClick={() => setOpen(!open)} style={{ background: 'none', border: 'none', color: '#777', cursor: 'pointer', display: 'flex' }}>
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
+        </div>
+        
+        {/* Hidden Admin Login - Only accessible via direct URL */}
+        <div style={{ display: 'none' }}>
+          <Link to="/admin/login">Admin</Link>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {open && (
-        <div style={{ borderTop: '1px solid #1a1a1a', padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <div style={{ borderTop: '1px solid #1a1a1a', padding: '16px clamp(12px, 3vw, 24px)', display: 'flex', flexDirection: 'column', gap: 4 }}>
           {links.map(l => (
             <Link key={l.to} to={l.to} onClick={() => setOpen(false)} style={{
               padding: '10px 12px', borderRadius: 8, fontSize: 14, fontWeight: 500, textDecoration: 'none',
@@ -63,8 +69,22 @@ export default function WebsiteNav() {
               {l.label}
             </Link>
           ))}
+          <button onClick={() => { setBookingOpen(true); setOpen(false); }} style={{
+            padding: '10px 12px', borderRadius: 8, fontSize: 14, fontWeight: 500,
+            background: 'linear-gradient(135deg, #c9a84c, #e4c677)',
+            color: '#0a0a0a',
+            border: 'none',
+            cursor: 'pointer',
+            fontWeight: 600,
+            marginTop: '8px',
+          }}>
+            Book a Call
+          </button>
         </div>
       )}
+
+      {/* Booking Modal */}
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
     </nav>
   );
 }

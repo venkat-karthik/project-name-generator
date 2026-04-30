@@ -4,10 +4,14 @@ import WebsiteNav from '../../components/WebsiteNav';
 import WebsiteFooter from '../../components/WebsiteFooter';
 
 const team = [
-  { name: 'Arjun Sharma', role: 'Founder & CEO', skills: 'Strategy, AI, Business Development', avatar: 'AS', desc: 'Built Velfound to make enterprise-grade AI accessible to every business. 6 years in tech & automation.' },
-  { name: 'Priya Mehta', role: 'Lead Developer', skills: 'React, Node.js, System Architecture', avatar: 'PM', desc: 'Full-stack engineer obsessed with performance and clean code. Shipped 30+ production systems.' },
-  { name: 'Rohan Das', role: 'AI Engineer', skills: 'Python, ML, Voice AI', avatar: 'RD', desc: 'Specialises in deploying LLMs and voice AI systems for real-world business use cases.' },
-  { name: 'Sneha Patel', role: 'BD Manager', skills: 'Sales, CRM, Client Success', avatar: 'SP', desc: 'Ensures every client sees measurable ROI from their Velfound systems.' },
+  { name: 'Kodeboyina Venkat Karthik', role: 'Founder & CEO', skills: 'Strategy, AI, Business Development', avatar: 'KV', desc: 'Founded Velfound to make enterprise-grade AI accessible to every business. Visionary leader driving innovation.' },
+  { name: 'Akshath Tumkur', role: 'Lead Developer', skills: 'React, Node.js, System Architecture', avatar: 'AT', desc: 'Full-stack engineer obsessed with performance and clean code. Shipped 30+ production systems.' },
+  { name: 'Sahil Ranakoti', role: 'AI Engineer', skills: 'Python, ML, Voice AI', avatar: 'SR', desc: 'Specialises in deploying LLMs and voice AI systems for real-world business use cases.' },
+  { name: 'Jayanth Karthik Enaganti', role: 'Product Manager', skills: 'Product Strategy, UX, Client Success', avatar: 'JE', desc: 'Ensures every client sees measurable ROI from their Velfound systems.' },
+  { name: 'Vikas Reddy Kalamalla', role: 'DevOps Engineer', skills: 'Cloud Infrastructure, Deployment', avatar: 'VK', desc: 'Ensures systems run reliably at scale with zero downtime.' },
+  { name: 'Nishanth Konakondu', role: 'Backend Engineer', skills: 'APIs, Databases, Integrations', avatar: 'NK', desc: 'Builds robust backend systems that power our automation platform.' },
+  { name: 'Varshith', role: 'Frontend Engineer', skills: 'React, UI/UX, Performance', avatar: 'V', desc: 'Creates beautiful, responsive interfaces that users love.' },
+  { name: 'Gudipati Srinadh', role: 'QA Engineer', skills: 'Testing, Quality Assurance, Automation', avatar: 'GS', desc: 'Ensures every system meets our high quality standards before deployment.' },
 ];
 
 const values = [
@@ -29,7 +33,7 @@ export default function AboutPage() {
           We Started Because<br /><span className="gold-text">Businesses Deserved Better</span>
         </h1>
         <p style={{ color: '#555', fontSize: 18, maxWidth: 600, margin: '0 auto', lineHeight: 1.7 }}>
-          Most automation agencies overpromise and underdeliver. We built Velfound to change that — with real systems, real results, and a team that actually cares.
+          Based in Hyderabad, Telangana — we built Velfound to change how businesses automate. Real systems, real results, and a team that actually cares.
         </p>
       </section>
 
@@ -38,7 +42,7 @@ export default function AboutPage() {
         <div className="card" style={{ padding: '48px 56px' }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: '#f0f0f0', marginBottom: 20 }}>Our Story</h2>
           <div style={{ color: '#666', fontSize: 15, lineHeight: 1.8 }}>
-            <p style={{ marginBottom: 16 }}>Velfound was founded in 2023 when our CEO Arjun was helping a friend's business automate their customer follow-up process. What should have been a simple task revealed a much bigger problem: businesses were drowning in manual work, but the tools to fix it were either too expensive, too complex, or too generic.</p>
+            <p style={{ marginBottom: 16 }}>Velfound was founded in 2023 when our CEO Kodeboyina Venkat Karthik was helping businesses automate their customer follow-up processes. What should have been a simple task revealed a much bigger problem: businesses were drowning in manual work, but the tools to fix it were either too expensive, too complex, or too generic.</p>
             <p style={{ marginBottom: 16 }}>We started with one belief: <span style={{ color: '#c9a84c' }}>every business should have access to AI systems that actually work.</span> Not demos. Not templates. Real, custom-built automation that runs your operations while you sleep.</p>
             <p>Today, Velfound has delivered 50+ projects across India and Southeast Asia — from AI voice agents for hospitals to full automation suites for e-commerce brands. Every project we build is designed to generate measurable ROI within 90 days.</p>
           </div>

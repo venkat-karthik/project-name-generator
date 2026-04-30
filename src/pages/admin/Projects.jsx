@@ -1,159 +1,281 @@
 import { useState } from 'react';
+import { Plus, Search, Filter, X, DollarSign, Users, Calendar, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Plus, Search, FolderKanban, ChevronRight, Lock, Clock, CheckCircle, AlertCircle, X } from 'lucide-react';
 import { useStore } from '../../store/useStore';
 
-const statusConfig = {
-  draft: { label: 'Draft', color: '#666', bg: '#1a1a1a' },
-  review: { label: 'Under Review', color: '#e4c677', bg: 'rgba(228,198,119,0.1)' },
-  approved: { label: 'Approved', color: '#4ade80', bg: 'rgba(74,222,128,0.1)' },
-};
-
-const paymentConfig = {
-  not_paid: { label: 'Not Paid', color: '#f87171' },
-  partial: { label: 'Partial', color: '#f59e0b' },
-  fully_paid: { label: 'Fully Paid', color: '#4ade80' },
-};
-
-function AddProjectModal({ onClose, onSave, leads, members }) {
-  const [form, setForm] = useState({ name: '', clientId: '', totalValue: '', paymentStatus: 'not_paid', companyReserve: 20, status: 'draft', bdBonus: { memberId: '', percent: 0 }, teamMembers: [] });
-
-  const addTeamMember = () => setForm(f => ({ ...f, teamMembers: [...f.teamMembers, { memberId: '', effort: 'contributed', subEmployees: [] }] }));
-  const updateMember = (i, data) => setForm(f => ({ ...f, teamMembers: f.teamMembers.map((m, idx) => idx === i ? { ...m, ...data } : m) }));
-  const removeMember = (i) => setForm(f => ({ ...f, teamMembers: f.teamMembers.filter((_, idx) => idx !== i) }));
-
-  return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()} style={{ maxWidth: 640 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#f0f0f0' }}>New Project</h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#555', cursor: 'pointer' }}><X size={18} /></button>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-          <div><label className="label">Project Name *</label><input className="input" value={form.name} onChange={e => setForm({...form, name: e.target.value})} placeholder="Project name" /></div>
-          <div>
-            <label className="label">Linked Client</label>
-            <select className="input" value={form.clientId} onChange={e => setForm({...form, clientId: Number(e.target.value)})}>
-              <option value="">Select client</option>
-              {leads.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
-            </select>
-          </div>
-          <div><label className="label">Total Value (₹)</label><input className="input" type="number" value={form.totalValue} onChange={e => setForm({...form, totalValue: Number(e.target.value)})} placeholder="e.g. 150000" /></div>
-          <div>
-            <label className="label">Payment Status</label>
-            <select className="input" value={form.paymentStatus} onChange={e => setForm({...form, paymentStatus: e.target.value})}>
-              <option value="not_paid">Not Paid</option>
-              <option value="partial">Partial</option>
-              <option value="fully_paid">Fully Paid</option>
-            </select>
-          </div>
-          <div>
-            <label className="label">Company Reserve (%)</label>
-            <input className="input" type="number" min="10" max="40" value={form.companyReserve} onChange={e => setForm({...form, companyReserve: Number(e.target.value)})} />
-          </div>
-          <div>
-            <label className="label">BD Bonus Member</label>
-            <select className="input" value={form.bdBonus.memberId} onChange={e => setForm({...form, bdBonus: { ...form.bdBonus, memberId: Number(e.target.value) }})}>
-              <option value="">None</option>
-              {members.filter(m => m.active).map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
-            </select>
-          </div>
-          {form.bdBonus.memberId && (
-            <div><label className="label">BD Bonus %</label><input className="input" type="number" min="0" max="20" value={form.bdBonus.percent} onChange={e => setForm({...form, bdBonus: { ...form.bdBonus, percent: Number(e.target.value) }})} /></div>
-          )}
-        </div>
-
-        <div style={{ marginTop: 20 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <label className="label" style={{ margin: 0 }}>Team Members</label>
-            <button onClick={addTeamMember} className="btn-sm" style={{ background: '#1a1a1a', color: '#c9a84c', border: '1px solid #222' }}><Plus size={12} /> Add Member</button>
-          </div>
-          {form.teamMembers.map((tm, i) => (
-            <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 8, marginBottom: 8 }}>
-              <select className="input" value={tm.memberId} onChange={e => updateMember(i, { memberId: Number(e.target.value) })}>
-                <option value="">Select member</option>
-                {members.filter(m => m.active).map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
-              </select>
-              <select className="input" value={tm.effort} onChange={e => updateMember(i, { effort: e.target.value })}>
-                <option value="none">Not involved (0)</option>
-                <option value="helped">Helped a little (0.5)</option>
-                <option value="contributed">Contributed (1)</option>
-                <option value="core">Core worker (2)</option>
-                <option value="led">Led the build (3)</option>
-              </select>
-              <button onClick={() => removeMember(i)} style={{ background: '#1a1a1a', border: '1px solid #222', borderRadius: 8, padding: '0 10px', color: '#f87171', cursor: 'pointer' }}><X size={14} /></button>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 24 }}>
-          <button className="btn-outline btn-sm" onClick={onClose}>Cancel</button>
-          <button className="btn-gold btn-sm" onClick={() => { onSave(form); onClose(); }}>Create Project</button>
-        </div>
-      </div>
-    </div>
-  );
-}
+const paymentStatuses = { not_paid: 'Not Paid', partial: 'Partial', fully_paid: 'Fully Paid' };
+const paymentColors = { not_paid: '#f87171', partial: '#f59e0b', fully_paid: '#4ade80' };
+const projectStatuses = { draft: 'Draft', review: 'Under Review', approved: 'Approved' };
+const projectColors = { draft: '#666', review: '#e4c677', approved: '#4ade80' };
 
 export default function Projects() {
-  const { projects, leads, members, addProject, currentUser } = useStore();
+  const { projects, leads, members, addProject } = useStore();
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const canCreate = currentUser?.accessLevel !== 'viewer';
+  const [newProject, setNewProject] = useState({
+    name: '',
+    clientId: '',
+    totalValue: 100000,
+    paymentStatus: 'not_paid',
+    status: 'draft',
+    companyReserve: 20,
+    bdBonus: { memberId: null, percent: 5 },
+    teamMembers: [],
+  });
 
-  const filtered = projects.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+  const filteredProjects = projects.filter(p =>
+    p.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const getClientName = (clientId) => {
+    const lead = leads.find(l => l.id === clientId);
+    return lead?.name || 'Unknown Client';
+  };
+
+  const getMemberName = (memberId) => {
+    const member = members.find(m => m.id === memberId);
+    return member?.name || 'Unknown';
+  };
+
+  const handleAddProject = () => {
+    if (newProject.name && newProject.clientId) {
+      addProject(newProject);
+      setNewProject({
+        name: '',
+        clientId: '',
+        totalValue: 100000,
+        paymentStatus: 'not_paid',
+        status: 'draft',
+        companyReserve: 20,
+        bdBonus: { memberId: null, percent: 5 },
+        teamMembers: [],
+      });
+      setShowModal(false);
+    }
+  };
+
+  const totalRevenue = projects.reduce((sum, p) => sum + p.totalValue, 0);
+  const approvedCount = projects.filter(p => p.status === 'approved').length;
+  const paidCount = projects.filter(p => p.paymentStatus === 'fully_paid').length;
 
   return (
     <div>
+      {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <div>
-          <h1 style={{ fontSize: 20, fontWeight: 700, color: '#f0f0f0' }}>Projects</h1>
-          <p style={{ color: '#555', fontSize: 13, marginTop: 2 }}>{projects.length} projects · {projects.filter(p => p.status === 'approved').length} approved</p>
+          <h1 style={{ fontSize: 22, fontWeight: 700, color: '#f0f0f0', letterSpacing: '-0.5px' }}>Projects</h1>
+          <p style={{ color: '#555', fontSize: 14, marginTop: 4 }}>Manage all projects and their financials</p>
         </div>
-        {canCreate && <button className="btn-gold btn-sm" onClick={() => setShowModal(true)}><Plus size={14} /> New Project</button>}
+        <button className="btn-gold" onClick={() => setShowModal(true)} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Plus size={16} /> New Project
+        </button>
       </div>
 
-      <div style={{ position: 'relative', marginBottom: 20, maxWidth: 360 }}>
-        <Search size={14} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: '#444' }} />
-        <input className="input" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search projects..." style={{ paddingLeft: 36 }} />
+      {/* Stats */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 24 }}>
+        {[
+          { label: 'Total Revenue', value: `₹${(totalRevenue / 100000).toFixed(1)}L`, color: '#c9a84c' },
+          { label: 'Projects', value: projects.length, color: '#60a5fa' },
+          { label: 'Approved', value: approvedCount, color: '#4ade80' },
+          { label: 'Fully Paid', value: paidCount, color: '#a78bfa' },
+        ].map(s => (
+          <div key={s.label} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: 16 }}>
+            <div style={{ fontSize: 28, fontWeight: 700, color: s.color, letterSpacing: '-1px', marginBottom: 4 }}>{s.value}</div>
+            <div style={{ fontSize: 12, color: '#555' }}>{s.label}</div>
+          </div>
+        ))}
       </div>
 
+      {/* Search & Filter */}
+      <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
+        <div style={{ flex: 1, position: 'relative' }}>
+          <Search size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: '#444' }} />
+          <input
+            type="text"
+            placeholder="Search projects..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="input"
+            style={{ paddingLeft: 40 }}
+          />
+        </div>
+        <button style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 8, padding: '10px 14px', color: '#666', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <Filter size={16} /> Filter
+        </button>
+      </div>
+
+      {/* Projects Table */}
       <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, overflow: 'hidden' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 120px 120px 100px 100px 40px', gap: 0, padding: '12px 20px', borderBottom: '1px solid #1a1a1a' }}>
-          {['Project', 'Value', 'Payment', 'Status', 'Team', ''].map(h => (
-            <div key={h} style={{ fontSize: 11, fontWeight: 600, color: '#444', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{h}</div>
-          ))}
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid #1a1a1a', background: '#0e0e0e' }}>
+                <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Project</th>
+                <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Client</th>
+                <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Value</th>
+                <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Payment</th>
+                <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Status</th>
+                <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: 12, fontWeight: 600, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Team</th>
+                <th style={{ padding: '12px 16px', textAlign: 'center', fontSize: 12, fontWeight: 600, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredProjects.map(p => (
+                <tr key={p.id} className="table-row">
+                  <td style={{ padding: '14px 16px' }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#f0f0f0' }}>{p.name}</div>
+                    <div style={{ fontSize: 11, color: '#444', marginTop: 2 }}>Created {new Date(p.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}</div>
+                  </td>
+                  <td style={{ padding: '14px 16px', fontSize: 13, color: '#888' }}>{getClientName(p.clientId)}</td>
+                  <td style={{ padding: '14px 16px' }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#c9a84c' }}>₹{(p.totalValue / 100000).toFixed(1)}L</div>
+                  </td>
+                  <td style={{ padding: '14px 16px' }}>
+                    <span className="badge" style={{ background: `${paymentColors[p.paymentStatus]}15`, color: paymentColors[p.paymentStatus], border: `1px solid ${paymentColors[p.paymentStatus]}30` }}>
+                      {paymentStatuses[p.paymentStatus]}
+                    </span>
+                  </td>
+                  <td style={{ padding: '14px 16px' }}>
+                    <span className="badge" style={{ background: `${projectColors[p.status]}15`, color: projectColors[p.status], border: `1px solid ${projectColors[p.status]}30` }}>
+                      {projectStatuses[p.status]}
+                    </span>
+                  </td>
+                  <td style={{ padding: '14px 16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <Users size={14} color="#666" />
+                      <span style={{ fontSize: 12, color: '#888' }}>{p.teamMembers?.length || 0}</span>
+                    </div>
+                  </td>
+                  <td style={{ padding: '14px 16px', textAlign: 'center' }}>
+                    <Link to={`/admin/projects/${p.id}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: '#c9a84c', textDecoration: 'none', fontSize: 12, fontWeight: 500 }}>
+                      View <ChevronRight size={14} />
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        {filtered.length === 0 && <div style={{ padding: '40px 20px', textAlign: 'center', color: '#333', fontSize: 14 }}>No projects found</div>}
-        {filtered.map(p => {
-          const client = leads.find(l => l.id === p.clientId);
-          const st = statusConfig[p.status] || statusConfig.draft;
-          const py = paymentConfig[p.paymentStatus] || paymentConfig.not_paid;
-          return (
-            <Link key={p.id} to={`/admin/projects/${p.id}`} style={{ display: 'grid', gridTemplateColumns: '1fr 120px 120px 100px 100px 40px', gap: 0, padding: '14px 20px', borderBottom: '1px solid #141414', textDecoration: 'none', transition: 'background 0.1s' }}
-              onMouseEnter={e => e.currentTarget.style.background = '#0e0e0e'}
-              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: '#f0f0f0', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  {p.name}
-                  {p.status === 'approved' && <Lock size={11} color="#c9a84c" />}
-                </div>
-                {client && <div style={{ fontSize: 11, color: '#444', marginTop: 2 }}>{client.name}</div>}
-              </div>
-              <div style={{ fontSize: 13, color: '#c9a84c', fontWeight: 600 }}>₹{p.totalValue?.toLocaleString()}</div>
-              <div><span style={{ fontSize: 11, color: py.color }}>{py.label}</span></div>
-              <div><span className="badge" style={{ background: st.bg, color: st.color, fontSize: 10 }}>{st.label}</span></div>
-              <div style={{ fontSize: 12, color: '#555' }}>{p.teamMembers?.length} members</div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                <ChevronRight size={14} color="#333" />
-              </div>
-            </Link>
-          );
-        })}
+
+        {filteredProjects.length === 0 && (
+          <div style={{ padding: '40px 20px', textAlign: 'center' }}>
+            <p style={{ color: '#555', fontSize: 14 }}>No projects found. Create one to get started.</p>
+          </div>
+        )}
       </div>
 
-      {showModal && <AddProjectModal onClose={() => setShowModal(false)} onSave={addProject} leads={leads} members={members} />}
+      {/* Add Project Modal */}
+      {showModal && (
+        <div className="modal-backdrop" onClick={() => setShowModal(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#f0f0f0' }}>Create New Project</h2>
+              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', color: '#666', cursor: 'pointer', padding: 4 }}>
+                <X size={18} />
+              </button>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+              <div>
+                <label className="label">Project Name *</label>
+                <input
+                  type="text"
+                  placeholder="e.g., EduPrime LMS"
+                  value={newProject.name}
+                  onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
+                  className="input"
+                />
+              </div>
+              <div>
+                <label className="label">Client *</label>
+                <select
+                  value={newProject.clientId}
+                  onChange={(e) => setNewProject({ ...newProject, clientId: parseInt(e.target.value) })}
+                  className="input"
+                >
+                  <option value="">Select a client</option>
+                  {leads.filter(l => l.status === 'won').map(l => (
+                    <option key={l.id} value={l.id}>{l.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+              <div>
+                <label className="label">Total Value (₹)</label>
+                <input
+                  type="number"
+                  placeholder="100000"
+                  value={newProject.totalValue}
+                  onChange={(e) => setNewProject({ ...newProject, totalValue: parseInt(e.target.value) })}
+                  className="input"
+                />
+              </div>
+              <div>
+                <label className="label">Company Reserve (%)</label>
+                <input
+                  type="number"
+                  placeholder="20"
+                  min="10"
+                  max="40"
+                  value={newProject.companyReserve}
+                  onChange={(e) => setNewProject({ ...newProject, companyReserve: parseInt(e.target.value) })}
+                  className="input"
+                />
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+              <div>
+                <label className="label">Payment Status</label>
+                <select
+                  value={newProject.paymentStatus}
+                  onChange={(e) => setNewProject({ ...newProject, paymentStatus: e.target.value })}
+                  className="input"
+                >
+                  <option value="not_paid">Not Paid</option>
+                  <option value="partial">Partial</option>
+                  <option value="fully_paid">Fully Paid</option>
+                </select>
+              </div>
+              <div>
+                <label className="label">BD Bonus Member</label>
+                <select
+                  value={newProject.bdBonus.memberId || ''}
+                  onChange={(e) => setNewProject({ ...newProject, bdBonus: { ...newProject.bdBonus, memberId: e.target.value ? parseInt(e.target.value) : null } })}
+                  className="input"
+                >
+                  <option value="">None</option>
+                  {members.filter(m => m.active).map(m => (
+                    <option key={m.id} value={m.id}>{m.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {newProject.bdBonus.memberId && (
+              <div style={{ marginBottom: 16 }}>
+                <label className="label">BD Bonus %</label>
+                <input
+                  type="number"
+                  placeholder="5"
+                  min="1"
+                  max="20"
+                  value={newProject.bdBonus.percent}
+                  onChange={(e) => setNewProject({ ...newProject, bdBonus: { ...newProject.bdBonus, percent: parseInt(e.target.value) } })}
+                  className="input"
+                />
+              </div>
+            )}
+
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button className="btn-gold" style={{ flex: 1 }} onClick={handleAddProject}>Create Project</button>
+              <button className="btn-outline" style={{ flex: 1 }} onClick={() => setShowModal(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

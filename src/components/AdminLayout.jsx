@@ -6,6 +6,7 @@ import {
   LogOut, Menu, X, ExternalLink, Shield
 } from 'lucide-react';
 import { useStore } from '../store/useStore';
+import { useAdminAuth } from '../context/AdminAuthContext';
 
 const navItems = [
   { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -27,12 +28,23 @@ const roles = ['founder', 'core', 'viewer'];
 
 export default function AdminLayout() {
   const { currentUser, members, notifications, setCurrentUser } = useStore();
+  const { adminUser, signOut } = useAdminAuth();
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [notifOpen, setNotifOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const unread = notifications.filter(n => !n.read).length;
 
   const isFounder = currentUser?.accessLevel === 'founder';
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/admin/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   return (
     <div style={{ display: 'flex', height: '100vh', background: '#080808', overflow: 'hidden' }}>
@@ -87,26 +99,42 @@ export default function AdminLayout() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8, cursor: 'pointer', transition: 'background 0.15s' }}
             onClick={() => setUserMenuOpen(!userMenuOpen)}>
             <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#c9a84c,#e4c677)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#0a0a0a', flexShrink: 0 }}>
-              {currentUser?.avatar}
+              {adminUser?.displayName?.split(' ').map(n => n[0]).join('').toUpperCase() || 'A'}
             </div>
             {sidebarOpen && (
               <div style={{ flex: 1, overflow: 'hidden' }}>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#f0f0f0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{currentUser?.name}</div>
-                <div style={{ fontSize: 10, color: '#c9a84c', textTransform: 'capitalize' }}>{currentUser?.accessLevel}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#f0f0f0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{adminUser?.displayName || 'Admin'}</div>
+                <div style={{ fontSize: 10, color: '#c9a84c', textTransform: 'capitalize' }}>Founder</div>
               </div>
             )}
           </div>
 
-          {/* Role switcher for demo */}
+          {/* User Menu */}
           {userMenuOpen && sidebarOpen && (
             <div style={{ background: '#111', border: '1px solid #222', borderRadius: 8, padding: 8, marginTop: 4 }}>
-              <p style={{ fontSize: 10, color: '#444', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', padding: '4px 8px', marginBottom: 4 }}>Switch Demo Role</p>
-              {members.filter(m => m.active).map(m => (
-                <button key={m.id} onClick={() => { setCurrentUser(m); setUserMenuOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', background: currentUser?.id === m.id ? '#1a1a1a' : 'none', border: 'none', borderRadius: 6, padding: '7px 8px', cursor: 'pointer', color: currentUser?.id === m.id ? '#c9a84c' : '#777', fontSize: 12, textAlign: 'left' }}>
-                  <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#c9a84c' }}>{m.avatar}</div>
-                  <span>{m.name}</span>
-                </button>
-              ))}
+              <button
+                onClick={handleLogout}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  width: '100%',
+                  background: 'none',
+                  border: 'none',
+                  borderRadius: 6,
+                  padding: '8px 8px',
+                  cursor: 'pointer',
+                  color: '#f87171',
+                  fontSize: 12,
+                  textAlign: 'left',
+                  transition: 'background 0.15s',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#1a1a1a'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
+              >
+                <LogOut size={14} />
+                <span>Sign Out</span>
+              </button>
             </div>
           )}
         </div>

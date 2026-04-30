@@ -18,7 +18,7 @@ const projects = [
     client: 'RetailX Corp',
     tag: 'AI Voice', tagColor: '#60a5fa',
     title: '24/7 WhatsApp AI Support Agent',
-    challenge: 'RetailX's support team was overwhelmed with 500+ daily WhatsApp queries, causing 4-hour response delays.',
+    challenge: `RetailX's support team was overwhelmed with 500+ daily WhatsApp queries, causing 4-hour response delays.`,
     solution: 'Deployed a custom AI agent on WhatsApp that handles product queries, order status, returns, and complaints autonomously.',
     results: [{ label: 'Response Time', before: '4 hours', after: '< 30 sec' }, { label: 'Resolution Rate', before: '71%', after: '96%' }, { label: 'Support Staff Required', before: '8', after: '2' }],
     timeline: '3 weeks',

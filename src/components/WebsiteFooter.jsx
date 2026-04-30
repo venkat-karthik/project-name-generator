@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Zap, Twitter, Linkedin, Instagram, MessageCircle } from 'lucide-react';
+import { Zap, Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
 
 export default function WebsiteFooter() {
   return (
@@ -16,7 +16,7 @@ export default function WebsiteFooter() {
             </div>
             <p style={{ color: '#555', fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>Build Less. Automate More.<br />We build systems that run your business.</p>
             <div style={{ display: 'flex', gap: 12 }}>
-              {[Twitter, Linkedin, Instagram].map((Icon, i) => (
+              {[Mail, Phone, MapPin].map((Icon, i) => (
                 <a key={i} href="#" style={{ width: 36, height: 36, borderRadius: 8, border: '1px solid #1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#555', transition: 'all 0.15s' }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = '#c9a84c'; e.currentTarget.style.color = '#c9a84c'; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = '#1e1e1e'; e.currentTarget.style.color = '#555'; }}>
@@ -49,7 +49,7 @@ export default function WebsiteFooter() {
           {/* Contact */}
           <div>
             <p style={{ color: '#f0f0f0', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>Get in Touch</p>
-            <a href="mailto:hello@velfound.com" style={{ display: 'block', color: '#555', fontSize: 13, marginBottom: 10, textDecoration: 'none' }}>hello@velfound.com</a>
+            <a href="mailto:velfound1@gmail.com" style={{ display: 'block', color: '#555', fontSize: 13, marginBottom: 10, textDecoration: 'none' }}>velfound1@gmail.com</a>
             <button onClick={() => window.open('https://wa.me/919876543210', '_blank')} style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#4ade80', fontSize: 13, background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginBottom: 10 }}>
               <MessageCircle size={14} /> WhatsApp Us
             </button>
