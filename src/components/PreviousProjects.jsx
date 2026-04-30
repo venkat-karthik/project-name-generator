@@ -50,8 +50,8 @@ export default function PreviousProjects({ projects = [] }) {
             className="scale-in"
             style={{
               animationDelay: `${idx * 0.05}s`,
-              background: '#ffffff',
-              border: '1px solid #d5d5d7',
+              background: '#111',
+              border: '1px solid #1a1a1a',
               borderRadius: 16,
               overflow: 'hidden',
               transition: 'all 0.3s ease',
@@ -60,14 +60,14 @@ export default function PreviousProjects({ projects = [] }) {
               flexDirection: 'column',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#f5f5f7';
-              e.currentTarget.style.borderColor = '#000000';
+              e.currentTarget.style.background = '#1a1a1a';
+              e.currentTarget.style.borderColor = '#2a2a2a';
               e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.08)';
+              e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.4)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#ffffff';
-              e.currentTarget.style.borderColor = '#d5d5d7';
+              e.currentTarget.style.background = '#111';
+              e.currentTarget.style.borderColor = '#1a1a1a';
               e.currentTarget.style.transform = 'translateY(0)';
               e.currentTarget.style.boxShadow = 'none';
             }}
@@ -98,7 +98,7 @@ export default function PreviousProjects({ projects = [] }) {
               <h3 style={{
                 fontSize: 'clamp(14px, 3vw, 18px)',
                 fontWeight: 600,
-                color: '#000000',
+                color: '#f0f0f0',
                 marginBottom: 10,
                 lineHeight: 1.3,
               }}>
@@ -107,7 +107,7 @@ export default function PreviousProjects({ projects = [] }) {
 
               {/* Description */}
               <p style={{
-                color: '#555555',
+                color: '#888',
                 fontSize: 'clamp(12px, 2vw, 14px)',
                 lineHeight: 1.6,
                 marginBottom: 16,
@@ -130,9 +130,9 @@ export default function PreviousProjects({ projects = [] }) {
                       fontSize: '11px',
                       padding: '4px 10px',
                       borderRadius: 999,
-                      background: 'rgba(0, 0, 0, 0.05)',
-                      color: '#000000',
-                      border: '1px solid rgba(0, 0, 0, 0.1)',
+                      background: 'rgba(59, 130, 246, 0.1)',
+                      color: '#3b82f6',
+                      border: '1px solid rgba(59, 130, 246, 0.2)',
                       fontWeight: 500,
                     }}
                   >
@@ -145,9 +145,9 @@ export default function PreviousProjects({ projects = [] }) {
                       fontSize: '11px',
                       padding: '4px 10px',
                       borderRadius: 999,
-                      background: 'rgba(0, 0, 0, 0.08)',
-                      color: '#000000',
-                      border: '1px solid rgba(0, 0, 0, 0.15)',
+                      background: 'rgba(124, 255, 103, 0.1)',
+                      color: '#7cff67',
+                      border: '1px solid rgba(124, 255, 103, 0.2)',
                       fontWeight: 500,
                     }}
                   >
@@ -170,8 +170,8 @@ export default function PreviousProjects({ projects = [] }) {
                       <div
                         key={i}
                         style={{
-                          background: 'rgba(0, 0, 0, 0.05)',
-                          border: '1px solid rgba(0, 0, 0, 0.1)',
+                          background: 'rgba(59, 130, 246, 0.05)',
+                          border: '1px solid rgba(59, 130, 246, 0.1)',
                           borderRadius: 8,
                           padding: '10px',
                           display: 'flex',
@@ -179,18 +179,18 @@ export default function PreviousProjects({ projects = [] }) {
                           gap: 8,
                         }}
                       >
-                        <IconComponent size={14} color="#000000" />
+                        <IconComponent size={14} color="#3b82f6" />
                         <div>
                           <div style={{
                             fontSize: '12px',
                             fontWeight: 700,
-                            color: '#000000',
+                            color: '#3b82f6',
                           }}>
                             {metric.value}
                           </div>
                           <div style={{
                             fontSize: '9px',
-                            color: '#999999',
+                            color: '#666',
                             marginTop: 2,
                           }}>
                             {metric.label}
@@ -212,7 +212,7 @@ export default function PreviousProjects({ projects = [] }) {
                     display: 'flex',
                     alignItems: 'center',
                     gap: 6,
-                    color: '#000000',
+                    color: '#3b82f6',
                     fontSize: '12px',
                     fontWeight: 600,
                     textDecoration: 'none',
@@ -220,11 +220,11 @@ export default function PreviousProjects({ projects = [] }) {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.gap = '10px';
-                    e.currentTarget.style.color = '#555555';
+                    e.currentTarget.style.color = '#60a5fa';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.gap = '6px';
-                    e.currentTarget.style.color = '#000000';
+                    e.currentTarget.style.color = '#3b82f6';
                   }}
                 >
                   <GitBranch size={14} />
