@@ -51,19 +51,19 @@ export default function ContactPage() {
       <div style={{ position: 'relative', zIndex: 1 }}>
         <WebsiteNav />
 
-      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center' }}>
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(60px, 10vw, 80px) clamp(16px, 5vw, 24px) clamp(40px, 8vw, 60px)', textAlign: 'center' }}>
         <p className="section-tag" style={{ marginBottom: 16 }}>Contact Us</p>
-        <h1 style={{ fontSize: 'clamp(36px,5vw,64px)', fontWeight: 700, letterSpacing: '-2px', color: '#f0f0f0', marginBottom: 20 }}>
-          Let's Build Something<br /><span className="gold-text" style={{ background: 'linear-gradient(135deg, #7cff67, #B497CF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Remarkable Together</span>
+        <h1 style={{ fontSize: 'clamp(28px, 6vw, 64px)', fontWeight: 700, letterSpacing: '-2px', color: '#f0f0f0', marginBottom: 20 }}>
+          Let's Build Something<br /><span className="gold-text">Remarkable Together</span>
         </h1>
-        <p style={{ color: '#555', fontSize: 18, maxWidth: 520, margin: '0 auto' }}>Tell us about your project. We'll respond within 2 hours.</p>
+        <p style={{ color: '#aaa', fontSize: 'clamp(14px, 3vw, 18px)', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>Tell us about your project. We'll respond within 2 hours.</p>
       </section>
 
-      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px 80px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 32, alignItems: 'start' }}>
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px, 5vw, 24px) clamp(40px, 8vw, 80px)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(20px, 5vw, 32px)', alignItems: 'start' }}>
           {/* Contact Info */}
           <div>
-            <div className="card" style={{ padding: 32, marginBottom: 16 }}>
+            <div className="card" style={{ padding: 'clamp(20px, 4vw, 32px)', marginBottom: 16 }}>
               <h3 style={{ fontSize: 16, fontWeight: 600, color: '#f0f0f0', marginBottom: 20 }}>Get In Touch</h3>
 
               <a href="mailto:velfound1@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20, textDecoration: 'none' }}>
@@ -110,7 +110,7 @@ export default function ContactPage() {
           </div>
 
           {/* Form */}
-          <div className="card" style={{ padding: 36 }}>
+          <div className="card" style={{ padding: 'clamp(20px, 4vw, 36px)' }}>
             {sent ? (
               <div style={{ textAlign: 'center', padding: '40px 0' }}>
                 <CheckCircle2 size={48} color="#4ade80" style={{ margin: '0 auto 16px' }} />
@@ -126,7 +126,7 @@ export default function ContactPage() {
                     {error}
                   </div>
                 )}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 16 }}>
                   <div>
                     <label className="label">Full Name *</label>
                     <input className="input" placeholder="Rahul Sharma" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required disabled={loading} />
@@ -136,7 +136,7 @@ export default function ContactPage() {
                     <input className="input" type="email" placeholder="rahul@company.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required disabled={loading} />
                   </div>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 16 }}>
                   <div>
                     <label className="label">Phone</label>
                     <input className="input" placeholder="+91 98765 43210" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} disabled={loading} />

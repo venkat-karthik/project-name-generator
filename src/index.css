@@ -1334,3 +1334,186 @@ a:hover {
   color: #60a5fa;
   text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
 }
+
+
+/* ============================================
+   MOBILE EXPERIENCE IMPROVEMENTS
+   ============================================ */
+
+/* Mobile-first responsive improvements */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: clamp(24px, 6vw, 32px) !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: clamp(18px, 5vw, 24px) !important;
+  }
+
+  h3 {
+    font-size: clamp(16px, 4vw, 20px) !important;
+  }
+
+  p {
+    font-size: clamp(13px, 3vw, 14px) !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Better button sizing on mobile */
+  .btn-gold, .btn-outline {
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Better input sizing */
+  .input {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 12px 14px !important;
+  }
+
+  /* Better card padding */
+  .card {
+    padding: 16px !important;
+  }
+
+  /* Better section spacing */
+  section {
+    padding: 40px 16px !important;
+  }
+
+  /* Improve grid on mobile */
+  [style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Better flex wrapping */
+  [style*="display: flex"] {
+    flex-direction: column !important;
+  }
+
+  /* Improve modal on mobile */
+  .modal {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    margin: 0 auto !important;
+  }
+
+  /* Better navbar on mobile */
+  nav {
+    padding: 0 !important;
+  }
+
+  /* Improve testimonial cards */
+  [style*="testimonial"] {
+    padding: 16px !important;
+  }
+
+  /* Better spacing for lists */
+  ul, ol {
+    padding-left: 16px !important;
+  }
+
+  /* Improve table on mobile */
+  table {
+    font-size: 12px !important;
+  }
+
+  /* Better form spacing */
+  form {
+    gap: 12px !important;
+  }
+
+  /* Improve badge sizing */
+  .badge {
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+  }
+
+  /* Better link sizing */
+  a {
+    padding: 8px 0 !important;
+    display: inline-block !important;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  h1 {
+    font-size: clamp(28px, 6vw, 40px) !important;
+  }
+
+  h2 {
+    font-size: clamp(20px, 5vw, 28px) !important;
+  }
+
+  /* Better grid on tablet */
+  [style*="gridTemplateColumns"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Better button sizing */
+  .btn-gold, .btn-outline {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+  /* Smooth transitions on desktop */
+  * {
+    transition: all 0.2s ease;
+  }
+
+  /* Better hover effects */
+  button:hover {
+    transform: translateY(-2px);
+  }
+
+  a:hover {
+    color: #60a5fa;
+  }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  button, a, input {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+
+  /* Remove hover effects on touch */
+  button:hover {
+    transform: none !important;
+  }
+
+  /* Better spacing for touch */
+  [style*="gap"] {
+    gap: 12px !important;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  section {
+    padding: 20px 16px !important;
+  }
+
+  h1 {
+    font-size: 24px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .btn-gold, .btn-outline {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+  }
+}

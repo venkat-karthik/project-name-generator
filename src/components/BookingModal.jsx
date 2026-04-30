@@ -61,8 +61,7 @@ export default function BookingModal({ isOpen, onClose }) {
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: 'rgba(0,0,0,0.7)',
-      backdropFilter: 'blur(4px)',
+      background: 'rgba(0,0,0,0.8)',
       zIndex: 50,
       display: 'flex',
       alignItems: 'center',

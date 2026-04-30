@@ -19,7 +19,7 @@ export default function WebsiteNav() {
   const { pathname } = useLocation();
 
   return (
-    <nav style={{ borderBottom: '1px solid #1a1a1a', background: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 40 }}>
+    <nav style={{ borderBottom: '1px solid #1a1a1a', background: '#0a0a0a', position: 'sticky', top: 0, zIndex: 40 }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(12px, 3vw, 24px)', height: 'auto', minHeight: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
         {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>

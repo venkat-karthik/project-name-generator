@@ -53,12 +53,11 @@ export default function HomePage() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
-              padding: '8px 16px',
+              padding: 'clamp(8px, 2vw, 12px) clamp(12px, 3vw, 20px)',
               borderRadius: 999,
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              background: 'rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(10px)',
-              marginBottom: 32,
+              border: '1px solid rgba(124, 255, 103, 0.3)',
+              background: 'rgba(124, 255, 103, 0.1)',
+              marginBottom: 'clamp(20px, 5vw, 32px)',
               flexWrap: 'wrap',
               justifyContent: 'center',
             }}>
@@ -139,13 +138,12 @@ export default function HomePage() {
 
           {/* Stats Bar */}
           <div style={{
-            marginTop: 72,
+            marginTop: 'clamp(40px, 8vw, 72px)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(120px, 20vw, 160px), 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(100px, 20vw, 160px), 1fr))',
             gap: 1,
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            background: '#111',
+            border: '1px solid #1a1a1a',
             borderRadius: 16,
             overflow: 'hidden',
           }}>
@@ -218,22 +216,21 @@ export default function HomePage() {
                 className="scale-in"
                 style={{
                   animationDelay: `${idx * 0.05}s`,
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  background: '#111',
+                  border: '1px solid #1a1a1a',
                   borderRadius: 16,
-                  padding: 'clamp(20px, 4vw, 28px)',
+                  padding: 'clamp(16px, 4vw, 28px)',
                   transition: 'all 0.3s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                  e.currentTarget.style.background = '#1a1a1a';
+                  e.currentTarget.style.borderColor = '#2a2a2a';
                   e.currentTarget.style.transform = 'translateY(-4px)';
                   e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.4)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.background = '#111';
+                  e.currentTarget.style.borderColor = '#1a1a1a';
                   e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
@@ -284,14 +281,13 @@ export default function HomePage() {
         <section style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: 'clamp(60px, 10vw, 80px) clamp(16px, 5vw, 24px)',
+          padding: 'clamp(40px, 8vw, 80px) clamp(16px, 5vw, 24px)',
         }}>
           <div style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            background: '#111',
+            border: '1px solid #1a1a1a',
             borderRadius: 24,
-            padding: 'clamp(40px, 8vw, 72px) clamp(20px, 5vw, 40px)',
+            padding: 'clamp(32px, 8vw, 72px) clamp(16px, 5vw, 40px)',
             textAlign: 'center',
             position: 'relative',
             overflow: 'hidden',

@@ -60,9 +60,8 @@ export default function BlogPage() {
                 className="scale-in"
                 style={{
                   animationDelay: `${idx * 0.05}s`,
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  background: '#111',
+                  border: '1px solid #1a1a1a',
                   borderRadius: 16,
                   overflow: 'hidden',
                   transition: 'all 0.3s ease',
@@ -71,14 +70,14 @@ export default function BlogPage() {
                   flexDirection: 'column',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                  e.currentTarget.style.background = '#1a1a1a';
+                  e.currentTarget.style.borderColor = '#2a2a2a';
                   e.currentTarget.style.transform = 'translateY(-4px)';
                   e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.4)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.background = '#111';
+                  e.currentTarget.style.borderColor = '#1a1a1a';
                   e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
