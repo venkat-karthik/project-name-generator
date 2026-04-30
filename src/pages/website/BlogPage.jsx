@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
-import { Clock, ArrowRight, Tag } from 'lucide-react';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Clock, ArrowRight, Tag, CheckCircle } from 'lucide-react';
 import WebsiteNav from '../../components/WebsiteNav';
 import WebsiteFooter from '../../components/WebsiteFooter';
 import Aurora from '../../components/Aurora';
 import { useStore } from '../../store/useStore';
+import { subscribeToNewsletter, checkEmailSubscription } from '../../services/newsletterService';
 
 const AURORA_COLORS = ['#7cff67', '#B497CF', '#5227FF'];
 
@@ -15,7 +17,42 @@ const categoryColors = {
 };
 
 export default function BlogPage() {
+  const navigate = useNavigate();
   const blogPosts = useStore(s => s.blogPosts).filter(p => p.published);
+  const [email, setEmail] = useState('');
+  const [subscribeLoading, setSubscribeLoading] = useState(false);
+  const [subscribeSuccess, setSubscribeSuccess] = useState(false);
+  const [subscribeError, setSubscribeError] = useState('');
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      setSubscribeError('Please enter your email');
+      return;
+    }
+
+    setSubscribeLoading(true);
+    setSubscribeError('');
+
+    try {
+      const existing = await checkEmailSubscription(email);
+      if (existing) {
+        setSubscribeError('This email is already subscribed!');
+        setSubscribeLoading(false);
+        return;
+      }
+
+      await subscribeToNewsletter(email);
+      setSubscribeSuccess(true);
+      setEmail('');
+      setTimeout(() => setSubscribeSuccess(false), 3000);
+    } catch (error) {
+      setSubscribeError('Failed to subscribe. Please try again.');
+      console.error('Subscribe error:', error);
+    } finally {
+      setSubscribeLoading(false);
+    }
+  };
 
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', position: 'relative', overflow: 'hidden' }}>
@@ -173,6 +210,7 @@ export default function BlogPage() {
                       fontWeight: 600,
                       transition: 'all 0.2s ease',
                     }}
+                    onClick={() => navigate(`/blog/${p.id}`)}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.gap = '8px';
                       e.currentTarget.style.color = '#a3ff7f';
@@ -193,14 +231,67 @@ export default function BlogPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px 80px', textAlign: 'center' }}>
-        <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 20, padding: 48 }}>
-          <h2 style={{ fontSize: 28, fontWeight: 700, color: '#f0f0f0', letterSpacing: '-0.5px', marginBottom: 12 }}>Want AI Automation Tips Weekly?</h2>
-          <p style={{ color: '#555', fontSize: 15, marginBottom: 28 }}>Join 500+ business owners getting our automation insights every week.</p>
-          <div style={{ display: 'flex', gap: 8, justifyContent: 'center', maxWidth: 400, margin: '0 auto' }}>
-            <input className="input" placeholder="your@email.com" style={{ flex: 1 }} />
-            <button className="btn-gold">Subscribe</button>
-          </div>
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px, 5vw, 24px) clamp(40px, 8vw, 80px)', textAlign: 'center' }}>
+        <div style={{ background: '#111', border: '1px solid #1a1a1a', borderRadius: 20, padding: 'clamp(32px, 5vw, 48px)' }}>
+          <h2 style={{ fontSize: 'clamp(20px, 5vw, 28px)', fontWeight: 700, color: '#f0f0f0', letterSpacing: '-0.5px', marginBottom: 12 }}>Want AI Automation Tips Weekly?</h2>
+          <p style={{ color: '#888', fontSize: 'clamp(13px, 2vw, 15px)', marginBottom: 28, lineHeight: 1.6 }}>Join 500+ business owners getting our automation insights every week.</p>
+          
+          {subscribeSuccess ? (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              padding: '12px 20px',
+              background: 'rgba(74, 222, 128, 0.1)',
+              border: '1px solid rgba(74, 222, 128, 0.3)',
+              borderRadius: 8,
+              color: '#4ade80',
+              fontSize: 14,
+              fontWeight: 600,
+              maxWidth: 400,
+              margin: '0 auto',
+            }}>
+              <CheckCircle size={16} />
+              Successfully subscribed!
+            </div>
+          ) : (
+            <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: 8, justifyContent: 'center', maxWidth: 400, margin: '0 auto', flexWrap: 'wrap' }}>
+              <input 
+                type="email"
+                className="input" 
+                placeholder="your@email.com" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={subscribeLoading}
+                style={{ flex: 1, minWidth: '150px' }} 
+              />
+              <button 
+                type="submit"
+                className="btn-gold"
+                disabled={subscribeLoading}
+                style={{ opacity: subscribeLoading ? 0.6 : 1 }}
+              >
+                {subscribeLoading ? 'Subscribing...' : 'Subscribe'}
+              </button>
+            </form>
+          )}
+
+          {subscribeError && (
+            <div style={{
+              marginTop: 12,
+              padding: '8px 12px',
+              background: 'rgba(239, 68, 68, 0.1)',
+              border: '1px solid rgba(239, 68, 68, 0.3)',
+              borderRadius: 6,
+              color: '#ef4444',
+              fontSize: 12,
+              maxWidth: 400,
+              margin: '0 auto',
+            }}>
+              {subscribeError}
+            </div>
+          )}
         </div>
       </section>
 

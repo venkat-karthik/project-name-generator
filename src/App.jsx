@@ -9,6 +9,7 @@ import ServicesPage from './pages/website/ServicesPage';
 import SolutionsPage from './pages/website/SolutionsPage';
 import PricingPage from './pages/website/PricingPage';
 import BlogPage from './pages/website/BlogPage';
+import BlogDetailPage from './pages/website/BlogDetailPage';
 import AboutPage from './pages/website/AboutPage';
 import ContactPage from './pages/website/ContactPage';
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/solutions" element={<SolutionsPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:id" element={<BlogDetailPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
 
