@@ -3,13 +3,14 @@ import { Outlet, NavLink, Link, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Users, FolderKanban, TrendingUp, DollarSign,
   BarChart3, AlertTriangle, UserCog, FileText, Zap, Bell, ChevronDown,
-  LogOut, Menu, X, ExternalLink, Shield
+  LogOut, Menu, X, ExternalLink, Shield, Calendar
 } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { useAdminAuth } from '../context/AdminAuthContext';
 
 const navItems = [
   { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+  { to: '/admin/bookings', icon: Calendar, label: 'Bookings' },
   { to: '/admin/crm', icon: FolderKanban, label: 'CRM / Leads' },
   { to: '/admin/projects', icon: FileText, label: 'Projects' },
   { to: '/admin/team', icon: TrendingUp, label: 'Team Performance' },

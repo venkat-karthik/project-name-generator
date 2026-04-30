@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { X, Calendar, Clock, User, Mail, Phone } from 'lucide-react';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../config/firebase';
+import { addBooking } from '../services/bookingsService';
 
 export default function BookingModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -25,12 +24,8 @@ export default function BookingModal({ isOpen, onClose }) {
     setLoading(true);
 
     try {
-      // Add booking to Firestore
-      await addDoc(collection(db, 'bookings'), {
-        ...formData,
-        status: 'pending',
-        createdAt: serverTimestamp(),
-      });
+      // Add booking using the service
+      await addBooking(formData);
 
       setSuccess(true);
       setFormData({ name: '', email: '', phone: '', date: '', time: '', message: '' });

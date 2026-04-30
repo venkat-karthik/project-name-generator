@@ -27,6 +27,7 @@ import Disputes from './pages/admin/Disputes';
 import Members from './pages/admin/Members';
 import AuditLog from './pages/admin/AuditLog';
 import BlogAdmin from './pages/admin/BlogAdmin';
+import Bookings from './pages/admin/Bookings';
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
             >
               <Route index element={<Navigate to="/admin/dashboard" replace />} />
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="bookings" element={<Bookings />} />
               <Route path="crm" element={<CRM />} />
               <Route path="projects" element={<Projects />} />
               <Route path="projects/:id" element={<ProjectDetail />} />
