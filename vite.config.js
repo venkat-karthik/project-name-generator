@@ -13,13 +13,21 @@ export default defineConfig({
       name: 'copy-workflows',
       apply: 'build',
       generateBundle() {
-        const source = path.join(process.cwd(), 'public', 'n8n_workflows_data.json');
-        const content = fs.readFileSync(source, 'utf-8');
-        this.emitFile({
-          type: 'asset',
-          fileName: 'n8n_workflows_data.json',
-          source: content
-        });
+        const publicPath = path.join(process.cwd(), 'public', 'n8n_workflows_data.json');
+        const rootPath = path.join(process.cwd(), 'n8n_workflows_data.json');
+        const source = fs.existsSync(publicPath) ? publicPath : (fs.existsSync(rootPath) ? rootPath : null);
+        if (source) {
+          try {
+            const content = fs.readFileSync(source, 'utf-8');
+            this.emitFile({
+              type: 'asset',
+              fileName: 'n8n_workflows_data.json',
+              source: content
+            });
+          } catch (e) {
+            console.warn('Skipping n8n_workflows_data.json build copy:', e.message);
+          }
+        }
       }
     },
     {
