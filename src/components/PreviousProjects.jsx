@@ -9,10 +9,107 @@ const iconMap = {
   DollarSign: DollarSign,
 };
 
+const DEFAULT_CLIENT_PROJECTS = [
+  {
+    id: 1725450001000,
+    title: 'Prima Lane Luxury E-Commerce',
+    category: 'E-Commerce & Retail Automation',
+    description: 'Custom high-conversion e-commerce platform featuring automated catalog sync, dynamic checkout experience, and integrated customer retention flows built for Prima Lane.',
+    url: 'https://primalane.com/',
+    github_link: 'https://primalane.com/',
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=500&fit=crop',
+    technologies: ['React', 'Next.js', 'Shopify API', 'Tailwind CSS', 'Stripe'],
+    metrics: [
+      { label: 'Conversion Boost', value: '4.8x', icon: 'TrendingUp' },
+      { label: 'Uptime SLA', value: '99.9%', icon: 'CheckCircle' },
+      { label: 'Revenue Scaled', value: '+340%', icon: 'DollarSign' }
+    ],
+    status: 'published',
+  },
+  {
+    id: 1725450002000,
+    title: 'Alluri Resorts Luxury Booking Engine',
+    category: 'Hospitality & Resort Tech',
+    description: 'Full-stack luxury resort reservation system with instant room availability engine, automated guest WhatsApp updates, and zero-friction payment processing.',
+    url: 'https://alluriresorts.com/',
+    github_link: 'https://alluriresorts.com/',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=500&fit=crop',
+    technologies: ['React', 'Node.js', 'Reservation Engine', 'WhatsApp API', 'Stripe'],
+    metrics: [
+      { label: 'Monthly Bookings', value: '350+', icon: 'Calendar' },
+      { label: 'Automated Flow', value: '100%', icon: 'CheckCircle' },
+      { label: 'Booking Speed', value: '< 1 sec', icon: 'Clock' }
+    ],
+    status: 'published',
+  },
+  {
+    id: 1725450003000,
+    title: 'Mana Care Patient Management Suite',
+    category: 'Healthcare & Clinical Workflow AI',
+    description: 'Intelligent healthcare management platform automating doctor scheduling, electronic health records (EHR), patient triage, and automated follow-up sequences.',
+    url: 'http://mana-care.vercel.app/',
+    github_link: 'http://mana-care.vercel.app/',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop',
+    technologies: ['React', 'Vite', 'Cloud DB', 'Patient Portal', 'Telehealth'],
+    metrics: [
+      { label: 'Faster Check-ins', value: '60%', icon: 'Clock' },
+      { label: 'Scheduling Friction', value: 'Zero', icon: 'CheckCircle' },
+      { label: 'Patient Access', value: '24/7', icon: 'TrendingUp' }
+    ],
+    status: 'published',
+  },
+  {
+    id: 1725450004000,
+    title: 'Claims Automation Analytics Dashboard',
+    category: 'Enterprise Fintech & Insurance AI',
+    description: 'Enterprise claims processing dashboard powered by automated risk assessment workflows, real-time analytics, and automated approval pipelines.',
+    url: 'https://claims-bice.vercel.app/dashboard',
+    github_link: 'https://claims-bice.vercel.app/dashboard',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
+    technologies: ['React', 'Claims Engine', 'Chart.js', 'Document AI', 'Analytics'],
+    metrics: [
+      { label: 'Reduced Claim Time', value: '75%', icon: 'Clock' },
+      { label: 'Processing Accuracy', value: '99.2%', icon: 'CheckCircle' },
+      { label: 'Claims Automated', value: '10k+', icon: 'TrendingUp' }
+    ],
+    status: 'published',
+  },
+  {
+    id: 1725450005000,
+    title: 'Kesar Kosmetics Digital Storefront',
+    category: 'Beauty & Cosmetics E-Commerce',
+    description: 'Ultra-fast digital storefront engineered for Kesar Kosmetics, featuring interactive product showcases, personalized beauty consultation quizzes, and one-click cart checkout.',
+    url: 'https://www.kesarkosmetics.com/',
+    github_link: 'https://www.kesarkosmetics.com/',
+    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&h=500&fit=crop',
+    technologies: ['React', 'E-Commerce Engine', 'Inventory API', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Mobile Conversion', value: '3.2x', icon: 'TrendingUp' },
+      { label: 'Repeat Buyer Growth', value: '45%', icon: 'DollarSign' },
+      { label: 'Page Load', value: '< 800ms', icon: 'Clock' }
+    ],
+    status: 'published',
+  },
+  {
+    id: 1725450006000,
+    title: 'Weather Wiz Analytics & Forecast Engine',
+    category: 'Weather Intelligence & Geospatial Analytics',
+    description: 'Hyper-local weather forecasting application with live atmospheric data visualization, severe weather alert triggers, and interactive climate charts.',
+    url: 'https://weather-wiz-ta32.vercel.app/',
+    github_link: 'https://weather-wiz-ta32.vercel.app/',
+    image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&h=500&fit=crop',
+    technologies: ['React', 'OpenWeather API', 'GeoLocation', 'Chart.js', 'Vite'],
+    metrics: [
+      { label: 'Weather Intelligence', value: 'Real-time', icon: 'Clock' },
+      { label: 'Active Queries', value: '50k+', icon: 'TrendingUp' },
+      { label: 'Alert Accuracy', value: '99.8%', icon: 'CheckCircle' }
+    ],
+    status: 'published',
+  },
+];
+
 export default function PreviousProjects({ projects = [] }) {
-  if (!projects || projects.length === 0) {
-    return null;
-  }
+  const displayProjects = (projects && projects.length > 0) ? projects : DEFAULT_CLIENT_PROJECTS;
 
   return (
     <section style={{
@@ -52,7 +149,7 @@ export default function PreviousProjects({ projects = [] }) {
         gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(280px, 45vw, 380px), 1fr))',
         gap: 24,
       }}>
-        {projects.map((project, idx) => {
+        {displayProjects.map((project, idx) => {
           const targetUrl = project.url || project.github_link || '#';
           const isExternalUrl = targetUrl.startsWith('http://') || targetUrl.startsWith('https://');
 
