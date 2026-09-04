@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, MessageCircle, Star, Cpu, ShieldCheck, Zap, Layers, BarChart3, Clock, TrendingUp } from 'lucide-react';
+import { ArrowRight, MessageCircle, Star, Cpu, ShieldCheck, Zap, Layers, BarChart3, Clock, TrendingUp, ExternalLink, Globe, Sparkles } from 'lucide-react';
 import { useStore } from '../../store/useStore';
 import WebsiteNav from '../../components/WebsiteNav';
 import WebsiteFooter from '../../components/WebsiteFooter';
@@ -28,6 +28,93 @@ const capabilities = [
     icon: Cpu,
     tag: 'Next-Gen Intelligence'
   }
+];
+
+const clientServicesProvided = [
+  {
+    id: 'primalane',
+    title: 'Prima Lane Luxury Storefront',
+    category: 'E-Commerce & Retail AI',
+    url: 'https://primalane.com/',
+    description: 'Custom high-conversion e-commerce platform featuring automated catalog sync, dynamic checkout experience, and integrated customer retention flows built for Prima Lane.',
+    technologies: ['React', 'Next.js', 'Shopify API', 'Tailwind CSS', 'Stripe'],
+    metrics: [
+      { label: 'Conversion Boost', value: '4.8x' },
+      { label: 'Uptime SLA', value: '99.9%' },
+      { label: 'Revenue Scaled', value: '+340%' }
+    ],
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=500&fit=crop',
+  },
+  {
+    id: 'alluriresorts',
+    title: 'Alluri Resorts Luxury Booking Engine',
+    category: 'Hospitality & Resort Tech',
+    url: 'https://alluriresorts.com/',
+    description: 'Full-stack luxury resort reservation system with instant room availability engine, automated guest WhatsApp updates, and zero-friction payment processing.',
+    technologies: ['React', 'Node.js', 'Reservation Engine', 'WhatsApp API', 'Stripe'],
+    metrics: [
+      { label: 'Monthly Bookings', value: '350+' },
+      { label: 'Automated Flow', value: '100%' },
+      { label: 'Booking Speed', value: '< 1 sec' }
+    ],
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=500&fit=crop',
+  },
+  {
+    id: 'manacare',
+    title: 'Mana Care Patient Management Suite',
+    category: 'Healthcare & Clinical Workflow AI',
+    url: 'http://mana-care.vercel.app/',
+    description: 'Intelligent healthcare management platform automating doctor scheduling, electronic health records (EHR), patient triage, and automated follow-up sequences.',
+    technologies: ['React', 'Vite', 'Cloud DB', 'Patient Portal', 'Telehealth'],
+    metrics: [
+      { label: 'Faster Check-ins', value: '60%' },
+      { label: 'Scheduling Friction', value: 'Zero' },
+      { label: 'Patient Access', value: '24/7' }
+    ],
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop',
+  },
+  {
+    id: 'claimsdashboard',
+    title: 'Claims Automation Analytics Dashboard',
+    category: 'Enterprise Fintech & Insurance AI',
+    url: 'https://claims-bice.vercel.app/dashboard',
+    description: 'Enterprise claims processing dashboard powered by automated risk assessment workflows, real-time analytics, and automated approval pipelines.',
+    technologies: ['React', 'Claims Engine', 'Chart.js', 'Document AI', 'Analytics'],
+    metrics: [
+      { label: 'Reduced Claim Time', value: '75%' },
+      { label: 'Processing Accuracy', value: '99.2%' },
+      { label: 'Claims Automated', value: '10k+' }
+    ],
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
+  },
+  {
+    id: 'kesarkosmetics',
+    title: 'Kesar Kosmetics Digital Storefront',
+    category: 'Beauty & Cosmetics E-Commerce',
+    url: 'https://www.kesarkosmetics.com/',
+    description: 'Ultra-fast digital storefront engineered for Kesar Kosmetics, featuring interactive product showcases, personalized beauty consultation quizzes, and one-click cart checkout.',
+    technologies: ['React', 'E-Commerce Engine', 'Inventory API', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Mobile Conversion', value: '3.2x' },
+      { label: 'Repeat Buyer Growth', value: '45%' },
+      { label: 'Page Load', value: '< 800ms' }
+    ],
+    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&h=500&fit=crop',
+  },
+  {
+    id: 'weatherwiz',
+    title: 'Weather Wiz Analytics & Forecast Engine',
+    category: 'Weather Intelligence & Geospatial Analytics',
+    url: 'https://weather-wiz-ta32.vercel.app/',
+    description: 'Hyper-local weather forecasting application with live atmospheric data visualization, severe weather alert triggers, and interactive climate charts.',
+    technologies: ['React', 'OpenWeather API', 'GeoLocation', 'Chart.js', 'Vite'],
+    metrics: [
+      { label: 'Weather Intelligence', value: 'Real-time' },
+      { label: 'Active Queries', value: '50k+' },
+      { label: 'Alert Accuracy', value: '99.8%' }
+    ],
+    image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&h=500&fit=crop',
+  },
 ];
 
 export default function HomePage() {
@@ -287,6 +374,230 @@ export default function HomePage() {
                 }}>
                   {cap.description}
                 </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Services Provided To Our Clients Section */}
+        <section style={{
+          maxWidth: 1240,
+          margin: '0 auto',
+          padding: 'clamp(60px, 10vw, 100px) clamp(20px, 5vw, 32px)',
+        }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vw, 64px)' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '6px 16px',
+              borderRadius: 999,
+              background: 'rgba(56, 189, 248, 0.1)',
+              border: '1px solid rgba(56, 189, 248, 0.3)',
+              color: '#38bdf8',
+              fontSize: 13,
+              fontWeight: 600,
+              marginBottom: 16,
+            }}>
+              <Globe size={14} />
+              <span>Proven Client Impact</span>
+            </div>
+            <h2 className="fade-up" style={{
+              fontSize: 'clamp(28px, 5.5vw, 52px)',
+              fontWeight: 800,
+              letterSpacing: '-0.03em',
+              color: '#ffffff',
+            }}>
+              Services Provided To Our Clients
+            </h2>
+            <p style={{
+              color: '#94a3b8',
+              fontSize: 'clamp(14px, 2.5vw, 17px)',
+              maxWidth: 680,
+              margin: '12px auto 0',
+              lineHeight: 1.6,
+            }}>
+              Explore custom e-commerce stores, healthcare portals, booking platforms, and automated dashboards built and deployed by our team for live client operations.
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(280px, 45vw, 380px), 1fr))',
+            gap: 24,
+          }}>
+            {clientServicesProvided.map((service, idx) => (
+              <div
+                key={service.id}
+                className="glass-card scale-in"
+                style={{
+                  animationDelay: `${idx * 0.08}s`,
+                  background: 'rgba(15, 23, 42, 0.75)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  borderRadius: 22,
+                  overflow: 'hidden',
+                  transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  boxShadow: '0 12px 36px rgba(0, 0, 0, 0.45)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.4)';
+                  e.currentTarget.style.transform = 'translateY(-6px)';
+                  e.currentTarget.style.boxShadow = '0 20px 45px rgba(56, 189, 248, 0.18)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 12px 36px rgba(0, 0, 0, 0.45)';
+                }}
+              >
+                {/* Image Header with Category Badge */}
+                <div style={{
+                  width: '100%',
+                  height: 200,
+                  background: `url(${service.image}) center/cover no-repeat`,
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}>
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(180deg, rgba(6, 6, 8, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                  }} />
+
+                  <div style={{
+                    position: 'absolute',
+                    top: 14,
+                    left: 14,
+                    background: 'rgba(15, 23, 42, 0.85)',
+                    backdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(56, 189, 248, 0.35)',
+                    color: '#38bdf8',
+                    fontSize: 11,
+                    fontWeight: 600,
+                    padding: '5px 12px',
+                    borderRadius: 999,
+                    letterSpacing: '0.03em',
+                  }}>
+                    {service.category}
+                  </div>
+                </div>
+
+                {/* Content Body */}
+                <div style={{
+                  padding: 'clamp(20px, 4vw, 28px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flex: 1,
+                }}>
+                  <h3 style={{
+                    fontSize: 'clamp(18px, 3vw, 22px)',
+                    fontWeight: 700,
+                    color: '#ffffff',
+                    marginBottom: 10,
+                    lineHeight: 1.3,
+                    letterSpacing: '-0.02em',
+                  }}>
+                    {service.title}
+                  </h3>
+
+                  <p style={{
+                    color: '#94a3b8',
+                    fontSize: 'clamp(13px, 2vw, 15px)',
+                    lineHeight: 1.65,
+                    marginBottom: 20,
+                    flex: 1,
+                  }}>
+                    {service.description}
+                  </p>
+
+                  {/* Technologies */}
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: 6,
+                    marginBottom: 20,
+                  }}>
+                    {service.technologies.map((tech, i) => (
+                      <span
+                        key={i}
+                        style={{
+                          fontSize: '11px',
+                          padding: '4px 10px',
+                          borderRadius: 999,
+                          background: 'rgba(59, 130, 246, 0.12)',
+                          color: '#60a5fa',
+                          border: '1px solid rgba(59, 130, 246, 0.25)',
+                          fontWeight: 500,
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Metrics */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: 8,
+                    marginBottom: 24,
+                  }}>
+                    {service.metrics.map((m, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          background: 'rgba(15, 23, 42, 0.6)',
+                          border: '1px solid rgba(255, 255, 255, 0.08)',
+                          borderRadius: 12,
+                          padding: '8px 10px',
+                          textAlign: 'center',
+                        }}
+                      >
+                        <div style={{
+                          fontSize: '13px',
+                          fontWeight: 700,
+                          color: '#38bdf8',
+                        }}>
+                          {m.value}
+                        </div>
+                        <div style={{
+                          fontSize: '10px',
+                          color: '#64748b',
+                          marginTop: 2,
+                          fontWeight: 500,
+                        }}>
+                          {m.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Action Link Button */}
+                  <a
+                    href={service.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-gold safe-touch-target"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 8,
+                      width: '100%',
+                      padding: '12px 20px',
+                      fontSize: '14px',
+                      fontWeight: 600,
+                      borderRadius: 12,
+                      textDecoration: 'none',
+                      boxSizing: 'border-box',
+                    }}
+                  >
+                    Visit Client Site / Live App
+                    <ExternalLink size={15} />
+                  </a>
+                </div>
               </div>
             ))}
           </div>
