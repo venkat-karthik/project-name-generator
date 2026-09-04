@@ -480,15 +480,15 @@ export default function PortfolioProjects() {
                 />
               </div>
 
-              {/* GitHub Link */}
+              {/* Live Website / App URL */}
               <div>
-                <label className="label">GitHub Link (Optional)</label>
+                <label className="label">Live Website / App URL</label>
                 <input
                   type="url"
                   className="input"
-                  value={formData.github_link}
-                  onChange={(e) => setFormData(prev => ({ ...prev, github_link: e.target.value }))}
-                  placeholder="https://github.com/..."
+                  value={formData.url || ''}
+                  onChange={(e) => setFormData(prev => ({ ...prev, url: e.target.value, github_link: e.target.value }))}
+                  placeholder="https://..."
                 />
               </div>
 

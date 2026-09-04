@@ -75,10 +75,10 @@ export default function PortfolioPage() {
                   )}
                 </div>
 
-                {p.github_link && p.github_link !== '#' && (
+                {(p.url || (p.github_link && p.github_link !== '#')) && (
                   <div>
                     <a
-                      href={p.github_link}
+                      href={p.url || p.github_link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="safe-touch-target"
@@ -86,17 +86,18 @@ export default function PortfolioPage() {
                         display: 'flex',
                         alignItems: 'center',
                         gap: 6,
-                        background: '#18181b',
-                        color: '#f0f0f0',
-                        padding: '8px 14px',
-                        borderRadius: 8,
+                        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(56, 189, 248, 0.1))',
+                        color: '#38bdf8',
+                        padding: '10px 18px',
+                        borderRadius: 10,
                         textDecoration: 'none',
-                        fontSize: 13,
+                        fontSize: 14,
                         fontWeight: 600,
-                        border: '1px solid #27272a'
+                        border: '1px solid rgba(56, 189, 248, 0.3)',
+                        transition: 'all 0.3s ease',
                       }}
                     >
-                      View Live / Repo <ExternalLink size={14} />
+                      Visit Live Site / App <ExternalLink size={15} />
                     </a>
                   </div>
                 )}
